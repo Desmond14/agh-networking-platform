@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="TraderBook:war">
-    <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="TraderBook.war">
-      <element id="artifact" artifact-name="TraderBook:war exploded" />
-    </root>
-  </artifact>
-</component>
