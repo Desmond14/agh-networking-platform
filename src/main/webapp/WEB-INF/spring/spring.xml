@@ -22,4 +22,5 @@
 
     <!-- SpringSecurity -->
     <import resource="spring-security.xml"/>
+
 </beans>

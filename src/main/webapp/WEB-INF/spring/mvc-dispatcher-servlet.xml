@@ -2,10 +2,7 @@
 
 	<context:component-scan base-package="com.io.traderbook.controller" />
 
-    <!-- Database initialization -->
-    <jdbc:initialize-database data-source="dataSource">
-        <jdbc:script location="/WEB-INF/sqlScripts/database.sql"/>
-    </jdbc:initialize-database>
+
 
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
