@@ -17,28 +17,29 @@ public class OfferDiscussionPost {
     @GeneratedValue
     private long id;
 
+    @Column(length = 255)
     private String postContent;
-    @ManyToOne
-    private User postAuthor;
+    //@ManyToOne
+    //private User postAuthor;
 
     protected OfferDiscussionPost() {
 
     }
 
     public OfferDiscussionPost(User postAuthor, String postContent) {
-        this.postAuthor = postAuthor;
+        //this.postAuthor = postAuthor;
         this.postContent = postContent;
     }
 
-    private User getPostAuthor() {
-        return postAuthor;
-    }
+//    private User getPostAuthor() {
+//        return postAuthor;
+//    }
+//
+//    private void setPostAuthor(User postAuthor) {
+//        this.postAuthor = postAuthor;
+//    }
 
-    private void setPostAuthor(User postAuthor) {
-        this.postAuthor = postAuthor;
-    }
-
-    private String getPostContent() {
+    public String getPostContent() {
         return postContent;
     }
 

@@ -5,6 +5,8 @@ import com.io.traderbook.repository.OfferDiscussionPostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  * User: slakomy
@@ -20,5 +22,13 @@ public class OfferDiscussionPostService {
 
     public Iterable<OfferDiscussionPost> findAll() {
         return offerDiscussionPostRepository.findAll();
+    }
+
+    public void save(OfferDiscussionPost post) {
+        offerDiscussionPostRepository.save(post);
+    }
+
+    public List<OfferDiscussionPost> selectAllPosts() {
+        return offerDiscussionPostRepository.selectAllPosts();
     }
 }
