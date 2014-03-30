@@ -11,17 +11,16 @@ public class LoginController {
  
 	@RequestMapping(value="/welcome", method = RequestMethod.GET)
 	public String index(ModelMap model, Principal principal) {
- 
 		String name = principal.getName();
 		model.addAttribute("username", name);
 		model.addAttribute("message", "Spring Security Custom Form example");
 		return "loggedIn";
- 
+
 	}
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String indexRedirect() {
-        return "redirect:login";
+        return "redirect:/login";
     }
 
 	@RequestMapping(value="/login", method = RequestMethod.GET)

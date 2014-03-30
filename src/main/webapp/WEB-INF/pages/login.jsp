@@ -59,7 +59,7 @@
         </label>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
         <br/>
-        Don't have an account yet? <a href="#">Sign up now!</a>
+        Don't have an account yet? <a href="/register">Sign up now!</a>
     </form>
 </div>
 </body>
