@@ -50,6 +50,6 @@ public class OffersController {
             headers = {"Content-type=application/json"})
     public String addPost(@PathVariable("offerId") String offerId, @RequestBody OfferDiscussionPost post) {
         offerDiscussionPostService.save(new OfferDiscussionPost(new User("user"), post.getPostContent()));
-        return "/offers/" + offerId;
+        return "offers/" + offerId;
     }
 }

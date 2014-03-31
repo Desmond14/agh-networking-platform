@@ -7,6 +7,7 @@
         <non-jta-data-source>java:comp/env/jdbc/tomcatDataSource</non-jta-data-source>
         <class>com.io.traderbook.model.User</class>
         <class>com.io.traderbook.model.OfferDiscussionPost</class>
+        <class>com.io.traderbook.model.Offer</class>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL82Dialect" />
             <property name="hibernate.hbm2ddl.auto" value="update" />

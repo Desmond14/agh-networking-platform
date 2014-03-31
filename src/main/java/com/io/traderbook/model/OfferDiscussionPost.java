@@ -22,6 +22,10 @@ public class OfferDiscussionPost {
     //@ManyToOne
     //private User postAuthor;
 
+    @ManyToOne
+    @JoinColumn(name="OFFER_ID")
+    private Offer correspondingOffer;
+
     protected OfferDiscussionPost() {
 
     }
@@ -53,5 +57,13 @@ public class OfferDiscussionPost {
 
     private void setId(long id) {
         this.id = id;
+    }
+
+    private Offer getCorrespondingOffer() {
+        return correspondingOffer;
+    }
+
+    private void setCorrespondingOffer(Offer correspondingOffer) {
+        this.correspondingOffer = correspondingOffer;
     }
 }
