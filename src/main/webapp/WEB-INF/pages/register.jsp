@@ -1,4 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,7 +35,12 @@
 </div>
 <!-- /.navbar -->
 <div class="container">
-    <form role="form" class="form-signout">
+    <sf:form class="form-signout" method="POST" modelAttribute="user">
+        <c:if test="${not empty addUserError}">
+            <div class="alert alert-danger">
+                This login exists in database! Choose another one.<br/>
+            </div>
+        </c:if>
         <h2 class="form-signout-heading">Sign Up</h2>
         <br>
         <div class="form-group">
@@ -41,7 +48,8 @@
                 Login:
             </label>
             <div class="col-md-10">
-                <input type="text" class="form-control" id="login" placeholder="Login">
+                <sf:input path="username" class="form-control" id="login" placeholder="Login"/>
+                <sf:errors path="username" cssStyle="color: #ff0000" />
             </div>
         </div>
 
@@ -51,21 +59,22 @@
             </label>
 
             <div class="col-md-10">
-                <input type="password" class="form-control" id="password" placeholder="Enter Password">
+                <sf:password path="password" class="form-control" id="password" placeholder="Enter Password"/>
+                <sf:errors path="password" cssStyle="color: #ff0000"/>
             </div>
         </div>
 
-        <div class="form-group">
+        <%--<div class="form-group">
             <label for="uploadimage" class="col-md-2">
                 Upload Image:
             </label>
             <div class="col-md-10">
-                <input type="file" name="uploadimage" id="uploadimage">
+                <sf:input path="file" name="uploadimage" id="uploadimage"/>
                 <p class="help-block">
                     Allowed formats: jpeg, jpg, gif, png
                 </p>
             </div>
-        </div>
+        </div>--%>
 
         <div class="checkbox">
             <div class="col-md-2">
@@ -86,7 +95,7 @@
             </div>
         </div>
 
-    </form>
+    </sf:form>
 </div>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
