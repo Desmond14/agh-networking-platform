@@ -30,9 +30,10 @@ public class OfferDiscussionPost {
 
     }
 
-    public OfferDiscussionPost(User postAuthor, String postContent) {
+    public OfferDiscussionPost(User postAuthor, String postContent, Offer correspondingOffer) {
         //this.postAuthor = postAuthor;
         this.postContent = postContent;
+        this.correspondingOffer = correspondingOffer;
     }
 
 //    private User getPostAuthor() {
@@ -63,7 +64,7 @@ public class OfferDiscussionPost {
         return correspondingOffer;
     }
 
-    private void setCorrespondingOffer(Offer correspondingOffer) {
+    public void setCorrespondingOffer(Offer correspondingOffer) {
         this.correspondingOffer = correspondingOffer;
     }
 }

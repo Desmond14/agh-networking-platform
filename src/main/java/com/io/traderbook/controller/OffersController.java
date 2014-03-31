@@ -52,9 +52,11 @@ public class OffersController {
     @RequestMapping(value = "/offers/{offerId}",
             method = RequestMethod.POST,
             headers = {"Content-type=application/json"})
-    public String addPost(@PathVariable("offerId") Long offerId, @RequestBody OfferDiscussionPost post) {
+    public String addPost(@PathVariable("offerId") Long offerId, @RequestBody OfferDiscussionPost newPost) {
         //TODO: check if offer exists
-        offerDiscussionPostService.save(new OfferDiscussionPost(new User("user"), post.getPostContent()));
+        Offer offer = offerService.findById(offerId);
+        newPost.setCorrespondingOffer(offer);
+        offerDiscussionPostService.save(newPost);
         return "offers/" + offerId;
     }
 }
