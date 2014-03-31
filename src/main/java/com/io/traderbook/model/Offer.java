@@ -19,7 +19,7 @@ public class Offer {
     @GeneratedValue
     private long id;
 
-    @OneToMany(mappedBy = "correspondingOffer")
+    @OneToMany(mappedBy = "correspondingOffer", fetch = FetchType.EAGER)
     private List<OfferDiscussionPost> discussionPosts;
 
     @OneToOne
