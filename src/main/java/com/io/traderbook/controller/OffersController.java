@@ -1,8 +1,10 @@
 package com.io.traderbook.controller;
 
+import com.io.traderbook.model.Offer;
 import com.io.traderbook.model.OfferDiscussionPost;
 import com.io.traderbook.model.User;
 import com.io.traderbook.service.OfferDiscussionPostService;
+import com.io.traderbook.service.OfferService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,19 +30,21 @@ public class OffersController {
     @Autowired
     private OfferDiscussionPostService offerDiscussionPostService;
 
+    @Autowired
+    private OfferService offerService;
 
 
     @RequestMapping(value = "/offers/{offerId}", method = RequestMethod.GET)
-    public ModelAndView renderOfferDiscussion(@PathVariable("offerId") String offerId) throws Exception {
-        ModelAndView modelAndView = new ModelAndView("offerDiscussion");
-        Iterator<OfferDiscussionPost> postsIterator = offerDiscussionPostService.findAll().iterator();
-        List<OfferDiscussionPost> discussionPosts = new ArrayList<OfferDiscussionPost>();
-        while(postsIterator.hasNext()) {
-            discussionPosts.add(postsIterator.next());
+    public ModelAndView renderOfferDiscussion(@PathVariable("offerId") Long offerId) throws Exception {
+        ModelAndView modelAndView;
+        Offer offer = offerService.findById(offerId);
+        if (offer == null) {
+            //TODO: display "offer not found page"
+            modelAndView = new ModelAndView("loggedIn");
+            return modelAndView;
         }
-        if(discussionPosts.isEmpty()) {
-            throw new Exception("List is empty!");
-        }
+        modelAndView = new ModelAndView("offerDiscussion");
+        List<OfferDiscussionPost> discussionPosts = offer.getDiscussionPosts();
         modelAndView.addObject("posts", discussionPosts);
         return modelAndView;
     }
@@ -48,7 +52,8 @@ public class OffersController {
     @RequestMapping(value = "/offers/{offerId}",
             method = RequestMethod.POST,
             headers = {"Content-type=application/json"})
-    public String addPost(@PathVariable("offerId") String offerId, @RequestBody OfferDiscussionPost post) {
+    public String addPost(@PathVariable("offerId") Long offerId, @RequestBody OfferDiscussionPost post) {
+        //TODO: check if offer exists
         offerDiscussionPostService.save(new OfferDiscussionPost(new User("user"), post.getPostContent()));
         return "offers/" + offerId;
     }
