@@ -2,7 +2,6 @@ package com.io.traderbook.controller;
 
 import com.io.traderbook.model.Offer;
 import com.io.traderbook.model.OfferDiscussionPost;
-import com.io.traderbook.model.User;
 import com.io.traderbook.service.OfferDiscussionPostService;
 import com.io.traderbook.service.OfferService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -36,14 +32,12 @@ public class OffersController {
 
     @RequestMapping(value = "/offers/{offerId}", method = RequestMethod.GET)
     public ModelAndView renderOfferDiscussion(@PathVariable("offerId") Long offerId) throws Exception {
-        ModelAndView modelAndView;
+        ModelAndView modelAndView  = new ModelAndView("offerDiscussion");
         Offer offer = offerService.findById(offerId);
         if (offer == null) {
-            //TODO: display "offer not found page"
-            modelAndView = new ModelAndView("loggedIn");
+            modelAndView.addObject("notFound", true);
             return modelAndView;
         }
-        modelAndView = new ModelAndView("offerDiscussion");
         List<OfferDiscussionPost> discussionPosts = offer.getDiscussionPosts();
         modelAndView.addObject("posts", discussionPosts);
         return modelAndView;
@@ -53,8 +47,10 @@ public class OffersController {
             method = RequestMethod.POST,
             headers = {"Content-type=application/json"})
     public String addPost(@PathVariable("offerId") Long offerId, @RequestBody OfferDiscussionPost newPost) {
-        //TODO: check if offer exists
         Offer offer = offerService.findById(offerId);
+        if (offer == null) {
+            return "offers";
+        }
         newPost.setCorrespondingOffer(offer);
         offerDiscussionPostService.save(newPost);
         return "offers/" + offerId;

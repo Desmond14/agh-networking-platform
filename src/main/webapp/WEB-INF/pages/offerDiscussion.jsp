@@ -13,7 +13,6 @@
     <link href="/css/style.css" rel="stylesheet">
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.css" rel="stylesheet">
-
     <script src="/js/jquery-2.0.2js"></script>
     <script>
         function addComment() {
@@ -21,10 +20,7 @@
                 type: "POST",
                 url: "/offers/1",
                 data: JSON.stringify({ postContent: $('textarea[name=comment-form]').val() }),
-                contentType: 'application/json',
-                success: function (html) {
-                    alert(html);
-                }
+                contentType: 'application/json'
             });
         }
     </script>
@@ -56,34 +52,43 @@
 <!-- Content -->
 <div class="jumbotron">
     <div class="container">
-        <h1>This is place for offer title</h1>
+        <c:choose>
+            <c:when test="${not empty notFound}">
+                <h2>Offer not found!</h2>
+            </c:when>
+            <c:otherwise>
+                <h2>This is place for offer title</h2>
 
-        <p>This is place for offer details</p>
-
+                <p>This is place for offer details</p>
+            </c:otherwise>
+        </c:choose>
     </div>
 </div>
 
 <div class="container">
-    <div class="row">
-        <span><textarea placeholder="Enter your comment here" class="form-control" name="comment-form" rows="3"></textarea>
+    <c:if test="${empty notFound}">
+        <div class="row">
+        <span><textarea placeholder="Enter your comment here" class="form-control" name="comment-form"
+                        rows="3"></textarea>
         </span>
         <span><button type="button" class="btn btn-primary" onclick="addComment()">Submit comment
         </button></span>
-    </div>
-    <h3>Comments:</h3>
-    <c:if test="${not empty posts}">
-        <c:forEach var="post" items="${posts}">
-            <div class="row">
+        </div>
+        <h3>Comments:</h3>
+        <c:if test="${not empty posts}">
+            <c:forEach var="post" items="${posts}">
+                <div class="row">
 
-                <div class="col-md-8">
-                    <span class="author">Author's nick</span>
+                    <div class="col-md-8">
+                        <span class="author">Author's nick</span>
 
-                    <p>${post.postContent}</p>
+                        <p>${post.postContent}</p>
 
+                    </div>
                 </div>
-            </div>
 
-        </c:forEach>
+            </c:forEach>
+        </c:if>
     </c:if>
 
     <hr>
