@@ -39,7 +39,7 @@
                       transaction-manager-ref="transactionManager"/>
 
     <!-- Database initialization -->
-        <jdbc:initialize-database data-source="traderbookDataSource">
-           <jdbc:script location="/WEB-INF/sqlScripts/database.sql"/>
-       </jdbc:initialize-database>
+        <!--<jdbc:initialize-database data-source="traderbookDataSource">-->
+           <!--<jdbc:script location="/WEB-INF/sqlScripts/database.sql"/>-->
+       <!--</jdbc:initialize-database>-->
 </beans>

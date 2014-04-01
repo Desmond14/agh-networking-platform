@@ -13,7 +13,17 @@
     <link href="/css/style.css" rel="stylesheet">
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.css" rel="stylesheet">
-
+    <script src="/js/jquery-2.0.2js"></script>
+    <script>
+        function addComment() {
+            $.ajax({
+                type: "POST",
+                url: "/offers/1",
+                data: JSON.stringify({ postContent: $('textarea[name=comment-form]').val() }),
+                contentType: 'application/json'
+            });
+        }
+    </script>
 </head>
 <body>
 <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
@@ -42,44 +52,44 @@
 <!-- Content -->
 <div class="jumbotron">
     <div class="container">
-        <h1>This is place for offer title</h1>
+        <c:choose>
+            <c:when test="${not empty notFound}">
+                <h2>Offer not found!</h2>
+            </c:when>
+            <c:otherwise>
+                <h2>This is place for offer title</h2>
 
-        <p>This is place for offer details</p>
-
+                <p>This is place for offer details</p>
+            </c:otherwise>
+        </c:choose>
     </div>
 </div>
 
 <div class="container">
-    <!-- Example row of columns -->
-    <div class="row">
-        <div class="col-md-4">
-            <h2>Heading</h2>
-
-            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris
-                condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis
-                euismod. Donec sed odio dui. </p>
-
-            <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+    <c:if test="${empty notFound}">
+        <div class="row">
+        <span><textarea placeholder="Enter your comment here" class="form-control" name="comment-form"
+                        rows="3"></textarea>
+        </span>
+        <span><button type="button" class="btn btn-primary" onclick="addComment()">Submit comment
+        </button></span>
         </div>
-        <div class="col-md-4">
-            <h2>Heading</h2>
+        <h3>Comments:</h3>
+        <c:if test="${not empty posts}">
+            <c:forEach var="post" items="${posts}">
+                <div class="row">
 
-            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris
-                condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis
-                euismod. Donec sed odio dui. </p>
+                    <div class="col-md-8">
+                        <span class="author">Author's nick</span>
 
-            <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-        </div>
-        <div class="col-md-4">
-            <h2>Heading</h2>
+                        <p>${post.postContent}</p>
 
-            <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula
-                porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut
-                fermentum massa justo sit amet risus.</p>
+                    </div>
+                </div>
 
-            <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-        </div>
-    </div>
+            </c:forEach>
+        </c:if>
+    </c:if>
 
     <hr>
 
