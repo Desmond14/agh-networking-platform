@@ -18,9 +18,6 @@ import java.util.List;
 @Service
 public class UserService {
 
-/*    @PersistenceContext
-    private EntityManager em;*/
-
     @Autowired
     private UserRepository userRepository;
 
@@ -34,14 +31,14 @@ public class UserService {
         userRolesRepository.save(userRoles);
     }
 
-/*    public boolean checkIfUserIsInDatabase(String username) {
-        Query query = em.createNativeQuery("SELECT * FROM users where username = ?");
-        query.setParameter(1, username);
-        List<?> users = query.getResultList();
-        if (users.isEmpty())
-            return true;
+    public boolean checkIfUserIsInDatabase(String username) {
+        List<User> users = selectAllUsers();
+        for(User user : users) {
+            if (user.getUsername().equals(username))
+                return true;
+        }
         return false;
-    }*/
+    }
 
     public List<User> selectAllUsers() {
         return userRepository.selectAllUsers();

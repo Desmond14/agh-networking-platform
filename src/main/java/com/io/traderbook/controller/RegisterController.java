@@ -36,15 +36,13 @@ public class RegisterController {
     public String addUserFromRegisterForm(@Valid User user, BindingResult result, ModelMap modelMap) {
         if (result.hasErrors()) {
             return "register";
-        } else {
-            //     if (userService.checkIfUserIsInDatabase(user.getUsername())) {
-            //adding new user
-            userService.insertNewUser(user);
-            return "redirect:/";
+        } else if (userService.checkIfUserIsInDatabase(user.getUsername())) {
+            modelMap.addAttribute("addUserError", "true");
+            return "register";
         }
-        //    modelMap.addAttribute("addUserError", "true");
-        //    return "register";
+        //adding new user
+        userService.insertNewUser(user);
+        return "redirect:/";
     }
-
 
 }

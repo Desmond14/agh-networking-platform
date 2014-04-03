@@ -38,7 +38,7 @@
     <sf:form class="form-signout" method="POST" modelAttribute="user">
         <c:if test="${not empty addUserError}">
             <div class="alert alert-danger">
-                This login exists in database! Choose another one.<br/>
+                This login currently exists in database! Choose another one.<br/>
             </div>
         </c:if>
         <h2 class="form-signout-heading">Sign Up</h2>

@@ -20,7 +20,7 @@ public class User {
     @Size(min = 3, max = 20, message = "Username must consist of 3 to 20 characters.")
     @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Username must consist of alphanumeric characters with no spaces.")
     private String username;
-    @Size(min = 6, max = 20, message = "Password cannot be shorter than 6 and longer than 20 characters.")
+    @Size(min = 4, max = 20, message = "Password cannot be shorter than 4 and longer than 20 characters.")
     private String password;
 
     private boolean enabled;
