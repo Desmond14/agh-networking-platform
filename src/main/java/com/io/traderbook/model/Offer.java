@@ -22,8 +22,39 @@ public class Offer {
     @OneToMany(mappedBy = "correspondingOffer", fetch = FetchType.EAGER)
     private List<OfferDiscussionPost> discussionPosts;
 
-    @OneToOne
+    @ManyToOne
     private User seller;
+
+    private String content;
+
+    private String title;
+    private int price;
+
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
     private Offer() {
 
