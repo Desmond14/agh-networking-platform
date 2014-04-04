@@ -15,7 +15,9 @@
     <link href="/css/bootstrap.css" rel="stylesheet">
     <!-- Awesome fonts -->
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-
+    <script src="<c:url value="/js/jquery-2.0.2js" />"></script>
+    <script src="<c:url value="/js/bootstrap.js" />"></script>
+    <script src="<c:url value="/js/loggedIn.js" />"></script>
 </head>
 <body>
 <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
@@ -45,10 +47,10 @@
 <div class="container">
     <div class="row well">
         <div class="col-md-2">
-            <ul class="nav nav-pills nav-stacked well">
-                <li class="active"><a href="#"><i class="fa fa-home"></i> Home</a></li>
-                <li><a href="#"><i class="fa fa-envelope"></i> Messages</a></li>
-                <li><a href="#"><i class="fa fa-user"></i> Profile</a></li>
+            <ul class="nav nav-pills nav-stacked well" id="tabs">
+                <li class="active"><a data-toggle="tab" href="#home"><i class="fa fa-home"></i> Home</a></li>
+                <li><a data-toggle="tab" href="#messages"><i class="fa fa-envelope"></i> Messages</a></li>
+                <li><a data-toggle="tab" href="#profile"><i class="fa fa-user"></i> Profile</a></li>
                 <li>
                     <c:url value="/j_spring_security_logout" var="logout" />
                     <a href="${logout}"><i class="fa fa-sign-out"></i> Logout</a>
@@ -66,6 +68,5 @@
         </div>
     </div>
 </div>
-
 </body>
 </html>
