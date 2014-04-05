@@ -29,6 +29,13 @@ public class OffersController {
     @Autowired
     private OfferService offerService;
 
+    @RequestMapping(value = "/offers")
+    public ModelAndView renderOfferList() {
+        ModelAndView modelAndView = new ModelAndView("offerList");
+        Iterable<Offer> offers = offerService.getAll();
+        modelAndView.addObject("offers", offers);
+        return modelAndView;
+    }
 
     @RequestMapping(value = "/offers/{offerId}", method = RequestMethod.GET)
     public ModelAndView renderOfferDiscussion(@PathVariable("offerId") Long offerId) throws Exception {
@@ -38,6 +45,7 @@ public class OffersController {
             modelAndView.addObject("notFound", true);
             return modelAndView;
         }
+        modelAndView.addObject("offer", offer);
         List<OfferDiscussionPost> discussionPosts = offer.getDiscussionPosts();
         modelAndView.addObject("posts", discussionPosts);
         return modelAndView;
@@ -51,8 +59,17 @@ public class OffersController {
         if (offer == null) {
             return "offers";
         }
+        System.out.println(offer);
         newPost.setCorrespondingOffer(offer);
         offerDiscussionPostService.save(newPost);
         return "offers/" + offerId;
+    }
+
+    @RequestMapping(value = "/addOffer",
+            method = RequestMethod.POST,
+            headers = {"Content-type=application/json"})
+    public String addOffer(@RequestBody Offer offer) {
+        offerService.save(offer);
+        return "offerList";
     }
 }

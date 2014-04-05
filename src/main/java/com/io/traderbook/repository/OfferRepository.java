@@ -11,5 +11,4 @@ import org.springframework.data.repository.CrudRepository;
  * To change this template use File | Settings | File Templates.
  */
 public interface OfferRepository extends CrudRepository<Offer, Long>{
-    Offer findById(Long id);
 }

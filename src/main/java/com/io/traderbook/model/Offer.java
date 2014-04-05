@@ -23,6 +23,7 @@ public class Offer {
     private List<OfferDiscussionPost> discussionPosts;
 
     @ManyToOne
+    @JoinColumn(name = "seller_user_id")
     private User seller;
 
     private String content;
@@ -65,11 +66,11 @@ public class Offer {
     }
 
 
-    private long getId() {
+    public long getId() {
         return id;
     }
 
-    private void setId(long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -81,12 +82,17 @@ public class Offer {
         this.discussionPosts = discussionPosts;
     }
 
-    private User getSeller() {
+    public User getSeller() {
         return seller;
     }
 
-    private void setSeller(User seller) {
+    public void setSeller(User seller) {
         this.seller = seller;
+    }
+
+    @Override
+    public String toString(){
+        return "Offer no. " + getId();
     }
 
 }
