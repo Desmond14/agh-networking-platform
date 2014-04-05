@@ -18,7 +18,15 @@ public class OfferService {
     private OfferRepository offerRepository;
 
     public Offer findById(Long id) {
-        return offerRepository.findById(id);
+        return offerRepository.findOne(id);
+    }
+
+    public Iterable<Offer> getAll() {
+        return offerRepository.findAll();
+    }
+
+    public void save(Offer offer) {
+        offerRepository.save(offer);
     }
 
 }
