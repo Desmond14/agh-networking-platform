@@ -1,5 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<link href="/css/font-awesome.css" rel="stylesheet">
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,7 +35,7 @@
         <div class="navbar-collapse collapse">
             <form class="navbar-form navbar-right" action="/j_spring_security_logout" method="POST">
                 <div class="form-group text-muted">
-                    <strong>Logged as: ${username} &nbsp</strong>
+                    <strong>Logged as: <a href="#profile">${username}</a> &nbsp</strong>
                 </div>
                 <button type="submit" class="btn btn-danger">Log out</button>
             </form>
@@ -101,9 +100,20 @@
                 </div>
                 <!-- User Profile -->
                 <div class="panel tab-pane fade" id="profile">
-                    <img class="pic img-circle" src="http://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/twDq00QDud4/s120-c/photo.jpg" alt="...">
-                    <div class="name"><small>${username}</small></div>
-                    <a href="#" class="btn btn-xs btn-primary pull-right" style="margin:10px;"><span class="glyphicon glyphicon-picture"></span> Change cover</a>
+                    <div class="tab-content">
+                        <img class="pic img-circle" src="http://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/twDq00QDud4/s120-c/photo.jpg" alt="...">
+                        <div class="name"><small>${username}</small></div>
+                        <a href="#" class="btn btn-xs btn-primary pull-right" style="margin:10px;"><span class="glyphicon glyphicon-picture"></span> Change cover</a>
+                        <div class="profileContent well">
+                            <b>Login: &nbsp</b><input type="text" size="25" disabled="true" value="${username}"><br><br>
+                            <b>Password: &nbsp</b><input type="password" size="25" disabled="true" value="${password}"><br><br>
+                            <b>Email: &nbsp</b><input type="text" size="25" disabled="true" value="${email}"><br><br>
+                            <b>Country: &nbsp</b><input type="text" size="25" disabled="true" value="${country}"><br><br>
+                            <b>Current City: &nbsp</b><input type="text" size="25" disabled="true" value="${city}"><br><br>
+                            <a href="#" class="editProfileButton">Edit Profile</a>
+                        </div>
+
+                    </div>
                 </div>
             </div>
             <br><br><br>

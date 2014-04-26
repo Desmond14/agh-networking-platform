@@ -3,6 +3,7 @@ package com.io.traderbook.controller;
 import com.io.traderbook.model.User;
 import com.io.traderbook.model.UserRoles;
 import com.io.traderbook.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -19,12 +20,8 @@ import javax.validation.Valid;
 @Controller
 public class RegisterController {
 
+    @Autowired
     private UserService userService;
-
-    @Inject
-    public RegisterController(UserService userService) {
-        this.userService = userService;
-    }
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String displayRegisterForm(ModelMap modelMap) {

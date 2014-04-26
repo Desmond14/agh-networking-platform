@@ -45,7 +45,7 @@
         <br>
         <div class="form-group">
             <label for="login" class="col-md-2">
-                Login:
+                Login (required):
             </label>
             <div class="col-md-10">
                 <sf:input path="username" class="form-control" id="login" placeholder="Login"/>
@@ -55,7 +55,7 @@
 
         <div class="form-group">
             <label for="password" class="col-md-2">
-                Password:
+                Password (required):
             </label>
 
             <div class="col-md-10">
@@ -63,6 +63,40 @@
                 <sf:errors path="password" cssStyle="color: #ff0000"/>
             </div>
         </div>
+
+        <div class="form-group">
+            <label for="email" class="col-md-2">
+                Email (required):
+            </label>
+
+            <div class="col-md-10">
+                <sf:input path="email" class="form-control" id="email" placeholder="Enter Email"/>
+                <sf:errors path="email" cssStyle="color: #ff0000"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="country" class="col-md-2">
+                Country:
+            </label>
+
+            <div class="col-md-10">
+                <sf:input path="country" class="form-control" id="country" placeholder="Enter Country"/>
+                <sf:errors path="country" cssStyle="color: #ff0000"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="city" class="col-md-2">
+                City:
+            </label>
+
+            <div class="col-md-10">
+                <sf:input path="city" class="form-control" id="city" placeholder="Enter City"/>
+                <sf:errors path="city" cssStyle="color: #ff0000"/>
+            </div>
+        </div>
+
 
         <%--<div class="form-group">
             <label for="uploadimage" class="col-md-2">

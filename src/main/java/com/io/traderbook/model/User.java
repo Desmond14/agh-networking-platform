@@ -1,5 +1,8 @@
 package com.io.traderbook.model;
 
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.beans.factory.annotation.Required;
+
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -22,6 +25,10 @@ public class User {
     private String username;
     @Size(min = 4, max = 20, message = "Password cannot be shorter than 4 and longer than 20 characters.")
     private String password;
+    @Pattern(regexp = "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}", message = "Invalid email address.")
+    private String email;
+    private String country;
+    private String city;
 
     private boolean enabled;
 
@@ -42,6 +49,21 @@ public class User {
         return password;
     }
 
+    @Column(name = "EMAIL", nullable = false)
+    public String getEmail() {
+        return email;
+    }
+
+    @Column(name = "COUNTRY", nullable = true)
+    public String getCountry() {
+        return country;
+    }
+
+    @Column(name = "CITY", nullable = true)
+    public String getCity() {
+        return city;
+    }
+
     @Column(name = "ENABLED", nullable = false)
     public boolean getEnabled() {
         return enabled;
@@ -59,7 +81,21 @@ public class User {
         this.password = password;
     }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
+
+
 }

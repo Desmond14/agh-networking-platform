@@ -1,19 +1,35 @@
 package com.io.traderbook.controller;
  
 import java.security.Principal;
+
+import com.io.traderbook.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
- 
+
+import javax.inject.Inject;
+
 @Controller
 public class LoginController {
- 
+
+    @Autowired
+    private UserService userService;
+
 	@RequestMapping(value="/welcome", method = RequestMethod.GET)
 	public String index(ModelMap model, Principal principal) {
-		String name = principal.getName();
+        User user = (User) ((Authentication)principal).getPrincipal();
+		String name = user.getUsername();
+        String password = user.getPassword();
+        com.io.traderbook.model.User user1 = userService.getUserByName(name);
 		model.addAttribute("username", name);
-		model.addAttribute("message", "Spring Security Custom Form example");
+        model.addAttribute("password", password);
+        model.addAttribute("email", user1.getEmail());
+        model.addAttribute("country", user1.getCountry());
+        model.addAttribute("city", user1.getCity());
 		return "loggedIn";
 
 	}

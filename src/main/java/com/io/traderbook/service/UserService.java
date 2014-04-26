@@ -5,6 +5,7 @@ import com.io.traderbook.model.UserRoles;
 import com.io.traderbook.repository.UserRepository;
 import com.io.traderbook.repository.UserRolesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
@@ -43,6 +44,11 @@ public class UserService {
     public List<User> selectAllUsers() {
         return userRepository.selectAllUsers();
     }
+
+    public User getUserByName(String username) {
+        return userRepository.getUserByName(username);
+    }
+
 }
 
 enum Roles {
