@@ -57,7 +57,7 @@ public class Offer {
         this.title = title;
     }
 
-    private Offer() {
+    public Offer() {
 
     }
 

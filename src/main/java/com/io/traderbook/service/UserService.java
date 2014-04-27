@@ -13,9 +13,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.List;
 
-/**
- * Created by kklimek on 31/03/14.
- */
 @Service
 public class UserService {
 
@@ -45,10 +42,10 @@ public class UserService {
         return userRepository.selectAllUsers();
     }
 
-    public User getUserByName(String username) {
-        return userRepository.getUserByName(username);
-    }
 
+    public User getByName(String name) {
+        return userRepository.findByName(name);
+    }
 }
 
 enum Roles {

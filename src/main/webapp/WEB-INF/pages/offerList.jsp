@@ -61,6 +61,7 @@
                     <h2>${offer.title}</h2>
                     <p><b>${offer.price}</b></p>
                     <p>${offer.content} </p>
+                    <p><i>${offer.seller.username}</i></p>
 
                     <p><a class="btn btn-default" href="/offers/${offer.id}" role="button">View details &raquo;</a></p>
                 </c:forEach>
