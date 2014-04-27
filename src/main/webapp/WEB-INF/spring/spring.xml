@@ -15,7 +15,6 @@
 
     <!-- SpringMVC -->
     <import resource="spring-mvc.xml"/>
-    <!--<import resource="mvc-dispatcher-servlet.xml" />-->
 
     <!-- SpringData -->
     <import resource="spring-jpa.xml"/>
