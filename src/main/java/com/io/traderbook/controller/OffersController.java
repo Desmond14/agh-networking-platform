@@ -2,9 +2,13 @@ package com.io.traderbook.controller;
 
 import com.io.traderbook.model.Offer;
 import com.io.traderbook.model.OfferDiscussionPost;
+import com.io.traderbook.model.User;
 import com.io.traderbook.service.OfferDiscussionPostService;
 import com.io.traderbook.service.OfferService;
+import com.io.traderbook.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,6 +33,9 @@ public class OffersController {
     @Autowired
     private OfferService offerService;
 
+    @Autowired
+    private UserService userService;
+
 
     @RequestMapping(value = "/offers/{offerId}", method = RequestMethod.GET)
     public ModelAndView renderOfferDiscussion(@PathVariable("offerId") Long offerId) throws Exception {
@@ -52,6 +59,13 @@ public class OffersController {
             return "offers";
         }
         newPost.setCorrespondingOffer(offer);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        User user = userService.getUserByName(username);
+        if (user == null) {
+            return "offers";
+        }
+        newPost.setPostAuthor(user);
         offerDiscussionPostService.save(newPost);
         return "offers/" + offerId;
     }
