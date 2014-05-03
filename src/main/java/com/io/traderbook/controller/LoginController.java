@@ -35,8 +35,11 @@ public class LoginController {
 	}
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String indexRedirect() {
-        return "redirect:/login";
+    public String indexRedirect(Principal principal) {
+        if(principal == null)
+            return "redirect:/login";
+        else
+            return "redirect:/welcome";
     }
 
 	@RequestMapping(value="/login", method = RequestMethod.GET)

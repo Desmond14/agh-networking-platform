@@ -31,6 +31,15 @@
             </button>
             <a class="navbar-brand" href="/">TraderB00k</a>
         </div>
+        <!-- przycisk log out oraz informacja o zalogowanym uzytkowniku -->
+        <div class="navbar-collapse collapse">
+            <form class="navbar-form navbar-right" action="/j_spring_security_logout" method="POST">
+                <div class="form-group text-muted">
+                    <strong>Logged as: ${username} &nbsp</strong>
+                </div>
+                <button type="submit" class="btn btn-danger">Log out</button>
+            </form>
+        </div>
     </div>
     <!-- /.container -->
 </div>
