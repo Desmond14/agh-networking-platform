@@ -13,17 +13,7 @@
     <link href="/css/style.css" rel="stylesheet">
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.css" rel="stylesheet">
-    <script src="/js/jquery-2.0.2js"></script>
-    <script>
-        function addComment() {
-            $.ajax({
-                type: "POST",
-                url: "/offers/${offer.id}",
-                data: JSON.stringify({ postContent: $('textarea[name=comment-form]').val() }),
-                contentType: 'application/json'
-            });
-        }
-    </script>
+
 </head>
 <body>
 <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
@@ -50,46 +40,29 @@
     </div>
 </div>
 <!-- Content -->
-<div class="jumbotron">
+<<div class="jumbotron">
     <div class="container">
-        <c:choose>
-            <c:when test="${not empty notFound}">
-                <h2>Offer not found!</h2>
-            </c:when>
-            <c:otherwise>
-                <h2>${offer.title}</h2>
 
-                <p>${offer.content}</p>
-            </c:otherwise>
-        </c:choose>
+        <p><a class="btn btn-primary btn-lg" href="/addOffer" role="button">Add new offer</a></p>
     </div>
 </div>
 
 <div class="container">
-    <c:if test="${empty notFound}">
-        <div class="row">
-        <span><textarea placeholder="Enter your comment here" class="form-control" name="comment-form"
-                        rows="3"></textarea>
-        </span>
-        <span><button type="button" class="btn btn-primary" onclick="addComment()">Submit comment
-        </button></span>
+    <div class="row">
+        <div class="col-md-4">
+
+            <c:if test="${not empty offers}">
+                <c:forEach var="offer" items="${offers}">
+                    <h2>${offer.title}</h2>
+                    <p><b>${offer.price}</b></p>
+                    <p>${offer.content} </p>
+                    <p><i>${offer.seller.username}</i></p>
+
+                    <p><a class="btn btn-default" href="/offers/${offer.id}" role="button">View details &raquo;</a></p>
+                </c:forEach>
+            </c:if>
         </div>
-        <h3>Comments:</h3>
-        <c:if test="${not empty posts}">
-            <c:forEach var="post" items="${posts}">
-                <div class="row">
-
-                    <div class="col-md-8">
-                        <span class="author">Author's nick</span>
-
-                        <p>${post.postContent}</p>
-
-                    </div>
-                </div>
-
-            </c:forEach>
-        </c:if>
-    </c:if>
+    </div>
 
     <hr>
 

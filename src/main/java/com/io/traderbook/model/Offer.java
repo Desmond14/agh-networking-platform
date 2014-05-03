@@ -3,14 +3,6 @@ package com.io.traderbook.model;
 import javax.persistence.*;
 import java.util.List;
 
-/**
- * Created with IntelliJ IDEA.
- * User: slakomy
- * Date: 3/31/14
- * Time: 10:52 PM
- * To change this template use File | Settings | File Templates.
- */
-
 @Entity
 @Table(name = "Offers")
 public class Offer {
@@ -22,10 +14,42 @@ public class Offer {
     @OneToMany(mappedBy = "correspondingOffer", fetch = FetchType.EAGER)
     private List<OfferDiscussionPost> discussionPosts;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "seller_user_id")
     private User seller;
 
-    private Offer() {
+    private String content;
+
+    private String title;
+    private int price;
+
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public Offer() {
 
     }
 
@@ -34,11 +58,11 @@ public class Offer {
     }
 
 
-    private long getId() {
+    public long getId() {
         return id;
     }
 
-    private void setId(long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -50,12 +74,17 @@ public class Offer {
         this.discussionPosts = discussionPosts;
     }
 
-    private User getSeller() {
+    public User getSeller() {
         return seller;
     }
 
-    private void setSeller(User seller) {
+    public void setSeller(User seller) {
         this.seller = seller;
+    }
+
+    @Override
+    public String toString(){
+        return "Offer no. " + getId();
     }
 
 }

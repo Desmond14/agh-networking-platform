@@ -2,13 +2,6 @@ package com.io.traderbook.model;
 
 import javax.persistence.*;
 
-/**
- * Created with IntelliJ IDEA.
- * User: slakomy
- * Date: 3/29/14
- * Time: 11:16 PM
- * To change this template use File | Settings | File Templates.
- */
 @Entity
 @Table(name = "OfferDiscussionPosts")
 public class OfferDiscussionPost {

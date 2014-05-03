@@ -24,7 +24,7 @@ public class LoginController {
         User user = (User) ((Authentication)principal).getPrincipal();
 		String name = user.getUsername();
         String password = user.getPassword();
-        com.io.traderbook.model.User user1 = userService.getUserByName(name);
+        com.io.traderbook.model.User user1 = userService.getByName(name);
 		model.addAttribute("username", name);
         model.addAttribute("password", password);
         model.addAttribute("email", user1.getEmail());
@@ -35,8 +35,11 @@ public class LoginController {
 	}
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String indexRedirect() {
-        return "redirect:/login";
+    public String indexRedirect(Principal principal) {
+        if(principal == null)
+            return "redirect:/login";
+        else
+            return "redirect:/welcome";
     }
 
 	@RequestMapping(value="/login", method = RequestMethod.GET)

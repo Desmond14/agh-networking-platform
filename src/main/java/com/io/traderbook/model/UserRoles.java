@@ -2,9 +2,6 @@ package com.io.traderbook.model;
 
 import javax.persistence.*;
 
-/**
- * Created by kklimek on 30/03/14.
- */
 @Entity
 @Table(name = "user_roles")
 public class UserRoles {

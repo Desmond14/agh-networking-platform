@@ -7,13 +7,6 @@ import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-/**
- * Created with IntelliJ IDEA.
- * User: slakomy, kklimek
- * Date: 3/29/14
- * Time: 4:38 PM
- * To change this template use File | Settings | File Templates.
- */
 @Entity
 @Table(name = "users")
 public class User {
