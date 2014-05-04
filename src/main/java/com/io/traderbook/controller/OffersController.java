@@ -60,7 +60,6 @@ public class OffersController {
         modelAndView.addObject("offer", offer);
         List<OfferDiscussionPost> discussionPosts = offer.getDiscussionPosts();
         modelAndView.addObject("posts", discussionPosts);
-        modelAndView.addObject("username", principal.getName());
         return modelAndView;
     }
 
@@ -75,7 +74,7 @@ public class OffersController {
         newPost.setCorrespondingOffer(offer);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
-        User user = userService.getUserByName(username);
+        User user = userService.getByName(username);
         if (user == null) {
             return "offers";
         }
