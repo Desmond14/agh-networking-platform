@@ -30,6 +30,7 @@ public class LoginController {
         model.addAttribute("email", user1.getEmail());
         model.addAttribute("country", user1.getCountry());
         model.addAttribute("city", user1.getCity());
+
 		return "loggedIn";
 
 	}

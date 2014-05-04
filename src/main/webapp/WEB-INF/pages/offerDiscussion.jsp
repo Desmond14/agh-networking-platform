@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,7 +43,7 @@
         <div class="navbar-collapse collapse">
             <form class="navbar-form navbar-right" action="/j_spring_security_logout" method="POST">
                 <div class="form-group text-muted">
-                    <strong>Logged as: ${username} &nbsp</strong>
+                    <strong>Logged as: <sec:authentication property="principal.username"/> &nbsp</strong>
                 </div>
                 <button type="submit" class="btn btn-danger">Log out</button>
             </form>
@@ -80,7 +81,7 @@
                 <div class="row">
 
                     <div class="col-md-8">
-                        <span class="author">Author's nick</span>
+                        <span class="author">${post.postAuthor.username}</span>
 
                         <p>${post.postContent}</p>
 
