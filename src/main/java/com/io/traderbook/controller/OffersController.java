@@ -20,13 +20,6 @@ import org.springframework.web.servlet.ModelAndView;
 import java.security.Principal;
 import java.util.List;
 
-/**
- * Created with IntelliJ IDEA.
- * User: slakomy
- * Date: 3/30/14
- * Time: 3:47 PM
- * To change this template use File | Settings | File Templates.
- */
 @Controller
 public class OffersController {
 
