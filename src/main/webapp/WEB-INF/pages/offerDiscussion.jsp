@@ -23,11 +23,7 @@
                 data: JSON.stringify({ postContent: $('textarea[name=comment-form]').val() }),
                 contentType: 'application/json',
                 success: function() {
-                    alert("success");
                     addNewComentToDOM($('textarea[name=comment-form]').val());
-                },
-                error: function() {
-                    alert("failure");
                 }
             });
         };
