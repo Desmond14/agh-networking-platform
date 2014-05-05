@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -111,7 +112,52 @@
                             <b>Email: &nbsp</b><input type="text" size="25" disabled="true" value="${email}"><br><br>
                             <b>Country: &nbsp</b><input type="text" size="25" disabled="true" value="${country}"><br><br>
                             <b>Current City: &nbsp</b><input type="text" size="25" disabled="true" value="${city}"><br><br>
-                            <a href="#" class="editProfileButton">Edit Profile</a>
+                            <a href="#editProfile" data-toggle="modal" data-target="#myModal" class="editProfileButton">Edit Profile</a>
+
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                            <h4 class="modal-title" id="myModalLabel">Edit Profile</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <center>
+                                                <img src="http://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/twDq00QDud4/s120-c/photo.jpg" name="aboutme" width="140" height="140" border="0" class="img-circle"></a>
+                                                <h3 class="media-heading">${username} <small>${country}</small></h3>
+
+                                            </center>
+                                            <hr>
+                                            <center>
+                                                <p class="text-left">
+                                                <sf:form method="POST" modelAttribute="user">
+                                                    <strong>New password: </strong><br>
+                                                    <sf:password path="password" class="form-control" id="password" placeholder="Enter Password"/>
+                                                    <sf:errors path="password" cssStyle="color: #ff0000"/>
+                                                    <strong>New email: </strong><br>
+                                                    <sf:input path="email" class="form-control" id="email" placeholder="Enter Email"/>
+                                                    <sf:errors path="email" cssStyle="color: #ff0000"/>
+                                                    <strong>New country: </strong><br>
+                                                    <sf:input path="country" class="form-control" id="country" placeholder="Enter Country"/>
+                                                    <sf:errors path="country" cssStyle="color: #ff0000"/>
+                                                    <strong>New current city: </strong><br>
+                                                    <sf:input path="city" class="form-control" id="city" placeholder="Enter City"/>
+                                                    <sf:errors path="city" cssStyle="color: #ff0000"/>
+                                                </sf:form>
+                                                </p>
+                                                <br>
+                                            </center>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <center>
+                                                <button type="submit" class="btn btn-success" data-dismiss="modal">Save changes</button>
+                                            </center>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                     </div>

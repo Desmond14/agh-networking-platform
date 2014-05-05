@@ -25,6 +25,7 @@ public class LoginController {
 		String name = user.getUsername();
         String password = user.getPassword();
         com.io.traderbook.model.User user1 = userService.getByName(name);
+        model.addAttribute("user", user1);
 		model.addAttribute("username", name);
         model.addAttribute("password", password);
         model.addAttribute("email", user1.getEmail());
