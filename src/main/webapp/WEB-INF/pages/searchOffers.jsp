@@ -1,4 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,6 +14,7 @@
     <title>Sign in to TraderBook</title>
     <link href="/css/signin.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/searchOffers.css" rel="stylesheet">
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.css" rel="stylesheet">
 
@@ -39,40 +43,54 @@
         </div>
     </div>
 </div>
-<!-- Content -->
-<<div class="jumbotron">
-    <div class="container">
 
-        <p><a class="btn btn-primary btn-lg" href="/addOffer" role="button">Add new offer</a></p>
-        <p><a class="btn btn-success btn-lg" href="/offers/search" role="button">Search offers by keywords</a></p>
+<!-- Content -->
+<
+<div class="jumbotron">
+    <div class="container">
+        <h2>Search offers</h2>
     </div>
 </div>
 
 <div class="container">
     <div class="row">
         <div class="col-md-4">
-
+            <form method="POST" action="/offers/search">
+                <div class="input-group custom-search-form">
+                    <input type="text" class="form-control" name="searchString">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="submit">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </span>
+                </div>
+            </form>
             <c:if test="${not empty offers}">
+                Search results for "${requestScope.searchString}" :
                 <c:forEach var="offer" items="${offers}">
-                    <h2>${offer.title}</h2>
-                    <p><b>${offer.price}</b></p>
-                    <p>${offer.content} </p>
-                    <p><i>${offer.seller.username}</i></p>
+                    <c:if test="${fn:containsIgnoreCase(offer.title, searchString) or fn:containsIgnoreCase(offer.content, searchString)}">
+                        <h2>${offer.title}</h2>
 
-                    <p><a class="btn btn-default" href="/offers/${offer.id}" role="button">View details &raquo;</a></p>
+                        <p><b>${offer.price}</b></p>
+
+                        <p>${offer.content} </p>
+
+                        <p><i>${offer.seller.username}</i></p>
+
+                        <p><a class="btn btn-default" href="/offers/${offer.id}" role="button">View details &raquo;</a>
+                        </p>
+                    </c:if>
+
                 </c:forEach>
             </c:if>
         </div>
     </div>
 
     <hr>
-
     <footer>
         <p>&copy; Company 2014</p>
     </footer>
 </div>
-<!-- /container -->
-
 
 </body>
 </html>
