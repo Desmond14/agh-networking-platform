@@ -65,22 +65,19 @@
                     </span>
                 </div>
             </form>
-            <c:if test="${not empty offers}">
-                Search results for "${requestScope.searchString}" :
-                <c:forEach var="offer" items="${offers}">
-                    <c:if test="${fn:containsIgnoreCase(offer.title, searchString) or fn:containsIgnoreCase(offer.content, searchString)}">
-                        <h2>${offer.title}</h2>
+            Search results for "${requestScope.searchString}" :
+            <c:if test="${not empty foundedOffers}">
+                <c:forEach var="offer" items="${foundedOffers}">
+                    <h2>${offer.title}</h2>
 
-                        <p><b>${offer.price}</b></p>
+                    <p><b>${offer.price}</b></p>
 
-                        <p>${offer.content} </p>
+                    <p>${offer.content} </p>
 
-                        <p><i>${offer.seller.username}</i></p>
+                    <p><i>${offer.seller.username}</i></p>
 
-                        <p><a class="btn btn-default" href="/offers/${offer.id}" role="button">View details &raquo;</a>
-                        </p>
-                    </c:if>
-
+                    <p><a class="btn btn-default" href="/offers/${offer.id}" role="button">View details &raquo;</a>
+                    </p>
                 </c:forEach>
             </c:if>
         </div>

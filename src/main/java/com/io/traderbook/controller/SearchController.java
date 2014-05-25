@@ -9,6 +9,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class SearchController {
@@ -27,7 +29,14 @@ public class SearchController {
                 return searchForm;
 
             Iterable<Offer> offers = offerService.getAll();
-            searchForm.addObject("offers", offers);
+            List<Offer> foundedOffers = new ArrayList<Offer>();
+
+            for (Offer offer : offers) {
+                if (offer.getTitle().toLowerCase().contains(searchString.toLowerCase()) || offer.getContent().toLowerCase().contains(searchString.toLowerCase())) {
+                    foundedOffers.add(offer);
+                }
+            }
+            searchForm.addObject("foundedOffers", foundedOffers);
         }
         return searchForm;
     }
