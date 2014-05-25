@@ -36,7 +36,7 @@
         <div class="navbar-collapse collapse">
             <form class="navbar-form navbar-right" action="/j_spring_security_logout" method="POST">
                 <div class="form-group text-muted">
-                    <strong>Logged as: ${username} &nbsp</strong>
+                    <strong>Logged as: <a href="#profile">${username}</a> &nbsp</strong>
                 </div>
                 <button type="submit" class="btn btn-danger">Log out</button>
             </form>
@@ -48,27 +48,30 @@
 <
 <div class="jumbotron">
     <div class="container">
-        <h2>Search offers</h2>
+        <h2>Search Offers By Location</h2>
     </div>
 </div>
 
 <div class="container">
     <div class="row">
-        <div class="col-md-4">
-            <form method="POST" action="/offers/search">
+        <div class="col-md-6">
+            <form method="POST" action="/offers/searchByLocation">
                 <div class="input-group custom-search-form">
-                    <input type="text" class="form-control" name="searchString">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="submit">
-                            <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                    </span>
+        			<label for="location">Enter location:</label>
+        			<div class="input-group">
+                    	<input type="text" class="form-control" name="locationString" placeholder="Location">
+                    	<span class="input-group-btn">
+                        	<button class="btn btn-default" type="submit">
+                            	<span class="glyphicon glyphicon-search"></span>
+                        	</button>
+                    	</span>
+                    </div>
                 </div>
             </form>
             <c:if test="${not empty offers}">
-                Search results for "${requestScope.searchString}" :
+                Search results for "${requestScope.locationString}" :
                 <c:forEach var="offer" items="${offers}">
-                    <c:if test="${fn:containsIgnoreCase(offer.title, searchString) or fn:containsIgnoreCase(offer.content, searchString)}">
+                    <c:if test="${fn:containsIgnoreCase(offer.location, locationString)}">
                         <h2>${offer.title}</h2>
 
                         <p><b>${offer.price}</b></p>

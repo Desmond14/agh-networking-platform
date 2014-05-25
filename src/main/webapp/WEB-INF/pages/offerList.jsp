@@ -45,6 +45,7 @@
 
         <p><a class="btn btn-primary btn-lg" href="/addOffer" role="button">Add new offer</a></p>
         <p><a class="btn btn-success btn-lg" href="/offers/search" role="button">Search offers by keywords</a></p>
+        <p><a class="btn btn-warning btn-lg" href="/offers/searchByLocation" role="button">Search offers by location</a></p>
     </div>
 </div>
 
@@ -56,6 +57,7 @@
                 <c:forEach var="offer" items="${offers}">
                     <h2>${offer.title}</h2>
                     <p><b>${offer.price}</b></p>
+                    <p><b>${offer.location}</b></p>
                     <p>${offer.content} </p>
                     <p><i>${offer.seller.username}</i></p>
 
