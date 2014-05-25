@@ -2,10 +2,13 @@ package com.io.traderbook.service;
 
 import com.io.traderbook.model.Message;
 import com.io.traderbook.repository.MessageRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 public class MessageService {
+
+    @Autowired
     private MessageRepository messageRepository;
 
     public void save(Message message) {

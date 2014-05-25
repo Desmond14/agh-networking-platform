@@ -15,6 +15,8 @@ public class Message {
     @OneToOne
     private User receiver;
 
+    private String topic;
+
     private String content;
 
     @OneToOne
