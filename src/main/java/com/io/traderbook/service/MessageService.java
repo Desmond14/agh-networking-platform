@@ -3,9 +3,11 @@ package com.io.traderbook.service;
 import com.io.traderbook.model.Message;
 import com.io.traderbook.repository.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class MessageService {
 
     @Autowired
@@ -15,11 +17,11 @@ public class MessageService {
         messageRepository.save(message);
     }
 
-    public List<Message> findByReceiverId(Long id) {
+    public List<Message> findByReceiverId(Integer id) {
         return messageRepository.findByReceiverId(id);
     }
 
-    public List<Message> findBySenderId(Long id) {
+    public List<Message> findBySenderId(Integer id) {
         return messageRepository.findBySenderId(id);
     }
 }

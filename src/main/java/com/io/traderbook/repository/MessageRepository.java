@@ -9,8 +9,8 @@ import java.util.List;
 public interface MessageRepository extends CrudRepository<Message, Long> {
 
     @Query(value = "select m from Message m where m.receiver.id = ?1")
-    List<Message> findByReceiverId(Long id);
+    List<Message> findByReceiverId(Integer id);
 
     @Query(value = "select m from Message m where m.sender.id = ?1")
-    List<Message> findBySenderId(Long id);
+    List<Message> findBySenderId(Integer id);
 }
