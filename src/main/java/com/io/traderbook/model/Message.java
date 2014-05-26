@@ -26,10 +26,11 @@ public class Message {
 
     }
 
-    public Message(User sender, User receiver, String content) {
+    public Message(User sender, User receiver, String content, String topic) {
         this.sender = sender;
         this.receiver = receiver;
         this.content = content;
+        this.topic = topic;
     }
 
     private long getId() {
@@ -70,6 +71,14 @@ public class Message {
 
     public void setCorrespondingOffer(Offer correspondingOffer) {
         this.correspondingOffer = correspondingOffer;
+    }
+
+    public String getTopic() {
+        return topic;
+    }
+
+    public void setTopic(String topic) {
+        this.topic = topic;
     }
 
 }

@@ -49,7 +49,7 @@
         <div class="col-md-2">
             <ul class="nav nav-pills nav-stacked well" id="tabs">
                 <li class="active"><a data-toggle="tab" href="#home"><i class="fa fa-home"></i> Home</a></li>
-                <li><a data-toggle="tab" href="#messages"><i class="fa fa-envelope"></i> Messages</a></li>
+                <li><a href="/messages"><i class="fa fa-envelope"></i> Messages</a></li>
                 <li><a data-toggle="tab" href="#profile"><i class="fa fa-user"></i> Profile</a></li>
                 <li><a href="/offers"><i class="fa fa-book"></i> Offers</a></li>
                 <li>
