@@ -40,4 +40,20 @@ public class SearchController {
         }
         return searchForm;
     }
+
+    @RequestMapping(value = "/offers/searchByLocation")
+    public ModelAndView renderSearchOfferByLocationForm(Principal principal, HttpServletRequest request) {
+        ModelAndView searchForm = new ModelAndView("searchOffersByLocation");
+        searchForm.addObject("username", principal.getName());
+        if ("POST".equalsIgnoreCase(request.getMethod())) {
+            String locationString = request.getParameter("locationString");
+            searchForm.addObject("locationString", locationString);
+            if (locationString == null || locationString.trim().length() == 0)
+                return searchForm;
+
+            Iterable<Offer> offers = offerService.getAll();
+            searchForm.addObject("offers", offers);
+        }
+        return searchForm;
+    }
 }

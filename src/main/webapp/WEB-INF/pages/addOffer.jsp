@@ -70,6 +70,17 @@
         </div>
 
         <div class="form-group">
+            <label for="location" class="col-md-2">
+                Location:
+            </label>
+
+            <div class="col-md-10">
+                <sf:input path="location" class="form-control" id="location" placeholder="Offer location"/>
+                <sf:errors path="location" cssStyle="color: #ff0000"/>
+            </div>
+        </div>
+
+        <div class="form-group">
             <label for="content" class="col-md-2">
                 Content:
             </label>

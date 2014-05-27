@@ -17,6 +17,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.util.List;
 
@@ -37,6 +38,26 @@ public class OffersController {
         modelAndView.addObject("offers", offers);
         modelAndView.addObject("username", principal.getName());
         return modelAndView;
+    }
+    
+    @RequestMapping(value = "/offers", method = RequestMethod.GET)
+    public ModelAndView renderFilteredOfferList(Principal principal, HttpServletRequest request) {
+        ModelAndView filteredOffers = new ModelAndView("offerList");
+        filteredOffers.addObject("username", principal.getName());
+        String tmpVal = request.getParameter("minPrice");
+        if(tmpVal != null && tmpVal.trim().length() > 0){
+        	Integer minPrice = Integer.valueOf(tmpVal);
+    		filteredOffers.addObject("minPrice", minPrice);
+        }
+        tmpVal = request.getParameter("maxPrice");
+        if(tmpVal != null && tmpVal.trim().length() > 0){
+        	Integer maxPrice = Integer.valueOf(tmpVal);
+        	filteredOffers.addObject("maxPrice", maxPrice);
+        }
+
+        Iterable<Offer> offers = offerService.getAll();
+        filteredOffers.addObject("offers", offers);
+        return filteredOffers;
     }
 
     @RequestMapping(value = "/offers/{offerId}", method = RequestMethod.GET)
