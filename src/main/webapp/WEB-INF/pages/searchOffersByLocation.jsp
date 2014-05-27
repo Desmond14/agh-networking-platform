@@ -11,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Sign in to TraderBook</title>
+    <title>Search offers by location - TraderBook</title>
     <link href="/css/signin.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
     <link href="/css/searchOffers.css" rel="stylesheet">
@@ -54,7 +54,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-lg-6">
             <form method="POST" action="/offers/searchByLocation">
                 <div class="input-group custom-search-form">
         			<label for="location">Enter location:</label>
