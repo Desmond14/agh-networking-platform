@@ -54,6 +54,7 @@
                 <li class="active"><a href="/messages"><i class="fa fa-envelope"></i> Messages</a></li>
                 <li><a href="/welcome#profile"><i class="fa fa-user"></i> Profile</a></li>
                 <li><a href="/offers"><i class="fa fa-book"></i> Offers</a></li>
+                <li><a href="/groups"><i class="fa fa-users"></i> Groups</a></li>
                 <li>
                     <c:url value="/j_spring_security_logout" var="logout"/>
                     <a href="${logout}"><i class="fa fa-sign-out"></i> Logout</a>
