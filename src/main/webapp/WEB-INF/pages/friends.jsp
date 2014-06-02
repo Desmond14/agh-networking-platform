@@ -54,7 +54,7 @@
                 <li><a href="/messages"><i class="fa fa-envelope"></i> Messages</a></li>
                 <li><a href="/welcome#profile"><i class="fa fa-user"></i> Profile</a></li>
                 <li><a href="/offers"><i class="fa fa-book"></i> Offers</a></li>
-                <li><a href="/groups"><i class="fa fa-usersGroups"></i>Groups</a></li>
+                <li><a href="/groups"><i class="fa fa-users"></i>Groups</a></li>
                 <li class="active"><a href="/friends"><i class="fa fa-user"></i> Friends</a></li>
                 <li>
                     <c:url value="/j_spring_security_logout" var="logout"/>
@@ -64,12 +64,20 @@
         </div>
         <div class="col-md-10">
             <div class="tab-content">
-                <div class="jumbotron">
-                    <div class="container">
-                        <h1>Groups</h1>
+
+                <div class="row">
+                    <div class="col-md-4">Friend 1</div>
+                    <div class="col-md-4">Friend 2</div>
+                    <div class="col-md-4">Friend 3</div>
+                    <div class="col-md-4">Friend 1</div>
+                    <div class="col-md-4">Friend 2</div>
+                    <div class="col-md-4">Friend 3</div>
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <p><a class="btn btn-primary btn-lg" href="/friends/find" role="button">Find a friend</a></p>
                     </div>
+                    <div class="col-md-4"></div>
                 </div>
-                <p><a class="btn btn-primary btn-lg" href="/groups/create" role="button">Add new Group</a></p>
             </div>
         </div>
     </div>
