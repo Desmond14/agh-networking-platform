@@ -1,0 +1,48 @@
+body {
+    padding-top: 60px;
+    padding-bottom: 40px;
+    background-color: #eee;
+    height: auto;
+}
+
+.name
+{
+    position:absolute;
+    padding-left:200px;
+    font-size:30px;
+}
+
+div.jumbotron {
+    padding-top: 15px;
+}
+
+.dropdown
+{
+    position:absolute;
+}
+
+h1 {
+    text-shadow: -2px 2px 3px #fffb1b;
+}
+
+
+.change
+{
+    position:relative;
+    bottom:20px;
+    padding:1px;
+    color:white;
+    text-decoration:none;
+}
+
+
+.change:hover
+{
+    text-decoration:none;
+    background-color:black;
+    color:white;
+}
+
+.row {
+    height: 600px;
+}

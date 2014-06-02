@@ -50,7 +50,7 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/loginfailed", method = RequestMethod.GET)
-	public String loginerror(ModelMap model) {
+	public String loginError(ModelMap model) {
 		model.addAttribute("error", "true");
 		return "login";
 	}
