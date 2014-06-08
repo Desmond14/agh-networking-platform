@@ -8,17 +8,32 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.Set;
+
 @Service
 public class GroupService {
 
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private GroupRepository groupRepository;
+
     @Transactional
     public void save(Group group, String name) {
         User user = userRepository.findByName(name);
         user.getGroups().add(group);
         userRepository.save(user);
+    }
+
+    public Iterable<Group> getAll() {
+        return groupRepository.findAll();
+    }
+
+    public Set<Group> findUserGroups(String name) {
+        User user = userRepository.findByName(name);
+        return user.getGroups();
     }
 
 }

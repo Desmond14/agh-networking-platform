@@ -10,13 +10,26 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Add Group</title>
+    <title>Groups List</title>
     <link href="/css/signin.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
     <link href="/css/dropdownCheckbox.css" rel="stylesheet">
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.css" rel="stylesheet">
     <script src="<c:url value="/js/jquery-2.0.2js" />"></script>
+    <style type="text/css">
+        a.list-group-item {
+            height:auto;
+            min-height:200px;
+            background: #ffffff;
+        }
+        a.list-group-item.active small {
+            color: #2f49ff;
+        }
+        .stars {
+            margin:20px auto 1px;
+        }
+    </style>
 </head>
 <body>
 <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
@@ -44,55 +57,43 @@
     </div>
 </div>
 <!-- Content -->
-<<div class="jumbotron">
+<div class="jumbotron">
     <div class="container">
-       <h2>Create New Group</h2>
+        <h2>All groups</h2>
     </div>
 </div>
 
 <div class="container">
+    <div class="row">
         <ol class="breadcrumb">
             <li><a href="/groups">Groups</a></li>
-            <li class="active">Create New Group</li>
+            <li class="active">All groups</li>
         </ol>
-        <sf:form method="POST" modelAttribute="group">
-            <div class="form-group">
-
-                <label for="groupName" class="col-md-2">
-                    Group name:
-                </label>
-                <div class="col-md-10">
-                    <sf:input path="groupName" class="form-control" id="groupName" placeholder="Group name"/>
-                    <sf:errors path="groupName" cssStyle="color: #ff0000"/>
-                </div>
+        <div class="well">
+            <h1 class="text-center">All groups:</h1>
+            <div class="list-group">
+                <c:if test="${not empty groups}">
+                    <c:forEach var="group" items="${groups}">
+                        <a href="#" class="list-group-item">
+                            <div class="media col-md-3">
+                                <figure class="pull-left">
+                                    <img class="media-object img-rounded img-responsive" src="http://placehold.it/350x250" alt="placehold.it/350x250" >
+                                </figure>
+                            </div>
+                            <div class="col-md-6">
+                                <h2 class="list-group-item-heading"> ${group.groupName} </h2>
+                                <p class="list-group-item-text">${group.description}
+                                </p>
+                            </div>
+                            <div class="col-md-3 text-center">
+                                <h2> 120 <small> members </small></h2>
+                                <button type="button" class="btn btn-success btn-lg">Join!</button>
+                                <button type="button" class="btn btn-warning btn-lg">Leave!</button>
+                            </div>
+                        </a>
+                    </c:forEach>
+                </c:if>
             </div>
-
-            <div class="form-group">
-                <label for="description" class="col-md-2">
-                    Description:
-                </label>
-
-                <div class="col-md-10">
-                    <sf:textarea path="description" class="form-control" id="description" placeholder="Description"/>
-                    <sf:errors path="description" cssStyle="color: #ff0000"/>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-2">
-                </div>
-                <div class="col-md-10">
-                    <div class="btn-group">
-                        <button type="submit" class="btn btn-lg btn-success" style="margin: 10px">Submit</button>
-                        <a class="btn btn-lg btn-primary" href="/groups/" role="button" style="margin: 10px">Cancel</a>
-                    </div>
-                </div>
-            </div>
-
-        </sf:form>
-    <div class="row">
-        <div class="col-md-4">
-
         </div>
     </div>
 
@@ -102,6 +103,8 @@
         <p>&copy; Company 2014</p>
     </footer>
 </div>
+
+
 <!-- /container -->
 
 <script src="js/dropdown-checkbox.js"></script>

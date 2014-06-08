@@ -82,6 +82,7 @@
                     </div>
                 </div>
                 <p><a class="btn btn-primary btn-lg" href="/groups/create" role="button">Add new Group</a></p>
+                <p><a class="btn btn-primary btn-lg" href="/groups/allgroups" role="button">Display all groups</a></p>
             </div>
         </div>
     </div>
