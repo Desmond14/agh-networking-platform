@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -27,8 +28,8 @@ public class GroupService {
         userRepository.save(user);
     }
 
-    public Iterable<Group> getAll() {
-        return groupRepository.findAll();
+    public Collection<Group> getAll() {
+        return (Collection<Group>) groupRepository.findAll();
     }
 
     public Set<Group> findUserGroups(String name) {

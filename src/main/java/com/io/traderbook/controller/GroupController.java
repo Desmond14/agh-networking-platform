@@ -1,5 +1,6 @@
 package com.io.traderbook.controller;
 
+import com.google.common.collect.Sets;
 import com.io.traderbook.model.Group;
 import com.io.traderbook.model.User;
 import com.io.traderbook.service.GroupService;
@@ -13,10 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.jws.WebParam;
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Controller
 public class GroupController {
@@ -55,18 +55,17 @@ public class GroupController {
     }
 
     @RequestMapping(value = "/groups/allgroups")
-    public ModelAndView displayAllGroups(Principal principal) {
+    public ModelAndView displayAllGroups() {
         ModelAndView modelAndView = new ModelAndView("groupList");
-        Iterable<Group> groups = groupService.getAll();
+        Collection<Group> groups = groupService.getAll();
         modelAndView.addObject("groups", groups);
         return modelAndView;
     }
 
-    @RequestMapping(value = "/groups/allgroups", params = "mygroup")
-    public ModelAndView displayUserGroups(Principal principal) {
+    @RequestMapping(value = "/groups/allgroups", params = "mygroups")
+    public ModelAndView displayUsersGroups(Principal principal) {
         ModelAndView modelAndView = new ModelAndView("groupList");
         Set<Group> usersGroups = groupService.findUserGroups(principal.getName());
-
         modelAndView.addObject("usersGroups", usersGroups);
         return modelAndView;
     }

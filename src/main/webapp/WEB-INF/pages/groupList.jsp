@@ -85,14 +85,14 @@
                                 <p class="list-group-item-text">${group.description}
                                 </p>
                             </div>
-                            <div class="col-md-3 text-center">
+                            <%--<div class="col-md-3 text-center">
                                 <h2> 120 <small> members </small></h2>
                                 <button type="button" class="btn btn-success btn-lg">Join!</button>
-                                <button type="button" class="btn btn-warning btn-lg">Leave!</button>
-                            </div>
+                            </div>--%>
                         </a>
                     </c:forEach>
                 </c:if>
+
             </div>
         </div>
     </div>
