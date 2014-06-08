@@ -17,8 +17,16 @@
     <link href="/css/bootstrap.css" rel="stylesheet">
     <!-- Awesome fonts -->
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <link href="/css/jquery.growl.css" rel="stylesheet" type="text/css" />
+
     <script src="<c:url value="/js/jquery-2.0.2js" />"></script>
     <script src="<c:url value="/js/bootstrap.js" />"></script>
+    <script src="<c:url value="/js/jquery.growl.js" />"></script>
+    <script type="text/javascript">
+        function displayInformation() {
+            $.growl.notice({ message: "Successfully created new group!" });
+        }
+    </script>
 </head>
 <body>
 <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
@@ -66,6 +74,11 @@
                 <div class="jumbotron">
                     <div class="container">
                         <h1>Groups</h1>
+                        <c:if test="${not empty addedGroup}">
+                            <script>
+                                displayInformation();
+                            </script>
+                        </c:if>
                     </div>
                 </div>
                 <p><a class="btn btn-primary btn-lg" href="/groups/create" role="button">Add new Group</a></p>

@@ -31,6 +31,12 @@ public class GroupController {
         return "addGroup";
     }
 
+    @RequestMapping(value = "/groups", params = "addedGroup")
+    public String afterAddedNewGroup(ModelMap modelMap) {
+        modelMap.addAttribute("addedGroup", "true");
+        return "groups";
+    }
+
     @Transactional
     @RequestMapping(value = "/groups/create", method = RequestMethod.POST)
     public String addGroup(Group group, BindingResult result, Principal principal) {
@@ -38,6 +44,6 @@ public class GroupController {
             return "addGroup";
         }
         groupService.save(group, principal.getName());
-        return "redirect:/groups";
+        return "redirect:/groups?addedGroup=" + group.getGroupName();
     }
 }
