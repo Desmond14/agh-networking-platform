@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
 
@@ -76,7 +77,7 @@ public class OffersController {
 
     @RequestMapping(value = "/addOffer",
             method = RequestMethod.POST)
-    public String addOffer(Offer offer, BindingResult result, ModelMap modelMap, Principal principal) {
+    public String addOffer(@Valid Offer offer, BindingResult result, ModelMap modelMap, Principal principal) {
         if(result.hasErrors()) {
             return "addOffer";
         }
