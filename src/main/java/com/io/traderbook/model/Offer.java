@@ -1,6 +1,10 @@
 package com.io.traderbook.model;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -18,10 +22,13 @@ public class Offer {
     @JoinColumn(name = "seller_user_id")
     private User seller;
 
+    @NotEmpty(message = "Offer description cannot be empty")
     private String content;
 
+    @NotEmpty(message = "Offer title cannot be empty")
     private String title;
-    
+
+    @NotEmpty(message = "Offer location cannot be empty")
     private String location;
     
     private int price;

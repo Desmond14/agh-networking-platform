@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Sign in to TraderBook</title>
+    <title>Offer ${offer.title} - TraderBook</title>
     <link href="/css/signin.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
     <!-- Bootstrap core CSS -->

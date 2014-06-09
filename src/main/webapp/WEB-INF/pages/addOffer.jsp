@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Sign in to TraderBook</title>
+    <title>Add Offer - TraderBook</title>
     <link href="/css/signout.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
     <!-- Bootstrap core CSS -->
