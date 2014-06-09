@@ -28,6 +28,7 @@ public class Offer {
     @NotEmpty(message = "Offer title cannot be empty")
     private String title;
 
+    @NotEmpty(message = "Offer location cannot be empty")
     private String location;
     
     private int price;
