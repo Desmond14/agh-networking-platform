@@ -25,11 +25,13 @@ public class LoginController {
 		String name = user.getUsername();
         String password = user.getPassword();
         com.io.traderbook.model.User user1 = userService.getByName(name);
+        model.addAttribute("user", user1);
 		model.addAttribute("username", name);
         model.addAttribute("password", password);
         model.addAttribute("email", user1.getEmail());
         model.addAttribute("country", user1.getCountry());
         model.addAttribute("city", user1.getCity());
+
 		return "loggedIn";
 
 	}
@@ -48,7 +50,7 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/loginfailed", method = RequestMethod.GET)
-	public String loginerror(ModelMap model) {
+	public String loginError(ModelMap model) {
 		model.addAttribute("error", "true");
 		return "login";
 	}

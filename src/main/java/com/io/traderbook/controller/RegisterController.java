@@ -14,9 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.inject.Inject;
 import javax.validation.Valid;
 
-/**
- * Created by kklimek on 30/03/14.
- */
 @Controller
 public class RegisterController {
 

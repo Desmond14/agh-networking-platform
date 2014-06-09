@@ -12,8 +12,8 @@ public class OfferDiscussionPost {
 
     @Column(length = 255)
     private String postContent;
-    //@ManyToOne
-    //private User postAuthor;
+    @ManyToOne
+    private User postAuthor;
 
     @ManyToOne
     @JoinColumn(name="OFFER_ID")
@@ -24,18 +24,18 @@ public class OfferDiscussionPost {
     }
 
     public OfferDiscussionPost(User postAuthor, String postContent, Offer correspondingOffer) {
-        //this.postAuthor = postAuthor;
+        this.postAuthor = postAuthor;
         this.postContent = postContent;
         this.correspondingOffer = correspondingOffer;
     }
 
-//    private User getPostAuthor() {
-//        return postAuthor;
-//    }
-//
-//    private void setPostAuthor(User postAuthor) {
-//        this.postAuthor = postAuthor;
-//    }
+    public User getPostAuthor() {
+        return postAuthor;
+    }
+
+    public void setPostAuthor(User postAuthor) {
+        this.postAuthor = postAuthor;
+    }
 
     public String getPostContent() {
         return postContent;

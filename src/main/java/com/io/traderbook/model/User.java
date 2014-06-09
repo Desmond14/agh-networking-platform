@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Required;
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -24,6 +26,8 @@ public class User {
     private String city;
 
     private boolean enabled;
+
+    private Set<Group> groups = new HashSet<Group>();
 
     @Id
     @GeneratedValue
@@ -62,6 +66,14 @@ public class User {
         return enabled;
     }
 
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(name = "users_groups",
+            joinColumns = {@JoinColumn(name = "USER_ID")},
+            inverseJoinColumns = {@JoinColumn(name = "GROUP_ID")})
+    public Set<Group> getGroups() {
+        return groups;
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }
@@ -90,5 +102,7 @@ public class User {
         this.enabled = enabled;
     }
 
-
+    public void setGroups(Set<Group> groups) {
+        this.groups = groups;
+    }
 }

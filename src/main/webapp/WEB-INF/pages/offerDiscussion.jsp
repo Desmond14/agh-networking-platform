@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,11 +19,27 @@
         function addComment() {
             $.ajax({
                 type: "POST",
-                url: "/offers/${offer.id}",
+                url: "./" + ${offer.id},
                 data: JSON.stringify({ postContent: $('textarea[name=comment-form]').val() }),
-                contentType: 'application/json'
+                contentType: 'application/json',
+                success: function() {
+                    addNewComentToDOM($('textarea[name=comment-form]').val());
+                }
             });
-        }
+        };
+
+        function addNewComentToDOM(postContent) {
+            var $rowDiv = $("<div>", {class: "row"});
+            var $insideDiv = $("<div>", {class: "col-md-8"});
+            $rowDiv.append($insideDiv);
+
+            var $authorSpan = $("<span>", {class: "author"});
+            $authorSpan.append("<sec:authentication property="principal.username"/>");
+            $insideDiv.append($authorSpan);
+            $insideDiv.append("<p>" + postContent + "</p>");
+
+            $( "#comments").append($rowDiv);
+        };
     </script>
 </head>
 <body>
@@ -42,7 +59,7 @@
         <div class="navbar-collapse collapse">
             <form class="navbar-form navbar-right" action="/j_spring_security_logout" method="POST">
                 <div class="form-group text-muted">
-                    <strong>Logged as: ${username} &nbsp</strong>
+                    <strong>Logged as: <sec:authentication property="principal.username"/> &nbsp</strong>
                 </div>
                 <button type="submit" class="btn btn-danger">Log out</button>
             </form>
@@ -65,7 +82,7 @@
     </div>
 </div>
 
-<div class="container">
+<div class="container" id="comments">
     <c:if test="${empty notFound}">
         <div class="row">
         <span><textarea placeholder="Enter your comment here" class="form-control" name="comment-form"
@@ -80,7 +97,7 @@
                 <div class="row">
 
                     <div class="col-md-8">
-                        <span class="author">Author's nick</span>
+                        <span class="author">${post.postAuthor.username}</span>
 
                         <p>${post.postContent}</p>
 
@@ -90,9 +107,9 @@
             </c:forEach>
         </c:if>
     </c:if>
-
+</div>
     <hr>
-
+<div class="container">
     <footer>
         <p>&copy; Company 2014</p>
     </footer>
