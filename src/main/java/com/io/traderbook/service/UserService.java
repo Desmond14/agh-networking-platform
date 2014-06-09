@@ -7,11 +7,13 @@ import com.io.traderbook.repository.UserRolesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class UserService {
@@ -27,6 +29,14 @@ public class UserService {
         UserRoles userRoles = new UserRoles(user.getId(), Roles.ROLE_USER.toString(), user);
         userRepository.save(user);
         userRolesRepository.save(userRoles);
+    }
+
+    public Iterable<UserRoles> findAllUserRoles() {
+        return userRolesRepository.findAll();
+    }
+
+    public void deleteUserRole(UserRoles userRoles) {
+        userRolesRepository.delete(userRoles);
     }
 
     public boolean checkIfUserIsInDatabase(String username) {
@@ -45,6 +55,18 @@ public class UserService {
 
     public User getByName(String name) {
         return userRepository.findByName(name);
+    }
+
+    public User getById(Integer id) {
+        return userRepository.findById(id);
+    }
+
+    public Integer setNewFriendsForId(Set<User> friends, String username) {
+        return userRepository.setNewFriendsForId(friends, username);
+    }
+
+    public void delete(Integer id) {
+        userRepository.delete(id);
     }
 }
 

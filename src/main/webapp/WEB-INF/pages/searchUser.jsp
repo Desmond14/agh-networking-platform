@@ -11,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Search Offers - TraderBook</title>
+    <title>Sign in to TraderBook</title>
     <link href="/css/signin.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
     <link href="/css/searchOffers.css" rel="stylesheet">
@@ -48,14 +48,14 @@
 <
 <div class="jumbotron">
     <div class="container">
-        <h2>Search offers</h2>
+        <h2>Find friends</h2>
     </div>
 </div>
 
 <div class="container">
     <div class="row">
         <div class="col-md-4">
-            <form method="POST" action="/offers/search">
+            <form method="POST" action="/friends/find">
                 <div class="input-group custom-search-form">
                     <input type="text" class="form-control" name="searchString">
                     <span class="input-group-btn">
@@ -66,19 +66,15 @@
                 </div>
             </form>
             Search results for "${requestScope.searchString}" :
-            <c:if test="${not empty foundedOffers}">
-                <c:forEach var="offer" items="${foundedOffers}">
-                    <h2>${offer.title}</h2>
+            <c:if test="${not empty foundedUsers}">
+                <c:forEach var="user" items="${foundedUsers}">
+                    <h2>${user.username}</h2>
 
-                    <p><b>${offer.price}</b></p>
+                    <p><b>${user.city}</b></p>
 
-                    <p><b>${offer.location}</b></p>
+                    <p><b>${user.country}</b></p>
 
-                    <p>${offer.content} </p>
-
-                    <p><i>${offer.seller.username}</i></p>
-
-                    <p><a class="btn btn-default" href="/offers/${offer.id}" role="button">View details &raquo;</a>
+                    <p><a class="btn btn-default" href="/friends/add/${user.id}" role="button">Add to friends &raquo;</a>
                     </p>
                 </c:forEach>
             </c:if>

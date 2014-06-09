@@ -53,6 +53,7 @@
                 <li><a data-toggle="tab" href="#profile"><i class="fa fa-user"></i> Profile</a></li>
                 <li><a href="/offers"><i class="fa fa-book"></i> Offers</a></li>
                 <li><a href="/groups"><i class="fa fa-users"></i> Groups</a></li>
+                <li><a href="/friends"><i class="fa fa-user"></i>Friends</a></li>
                 <li>
                     <c:url value="/j_spring_security_logout" var="logout" />
                     <a href="${logout}"><i class="fa fa-sign-out"></i> Logout</a>
@@ -64,6 +65,7 @@
                 <!-- Homepage -->
                 <div class="tab-pane fade in active" id="home">
                     <h3>Section A</h3>
+                    <center><img src="/img/banner.jpg" /></center>
                     <p>Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui. Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth.</p>
                 </div>
                 <!-- User's private messages -->

@@ -70,7 +70,7 @@ public class MessageController {
     public void addOtherUsernamesToModel(ModelAndView modelAndView, User user) {
         List<String> usernames = new ArrayList<String>();
         for (User currentUser : userService.selectAllUsers()) {
-            if (!currentUser.equals(user)) {
+            if (!currentUser.getUsername().equals(user.getUsername())) {
                 usernames.add(currentUser.getUsername());
             }
         }
