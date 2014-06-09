@@ -66,15 +66,17 @@
             <div class="tab-content">
 
                 <div class="row">
-                    <div class="col-md-4">Friend 1</div>
-                    <div class="col-md-4">Friend 2</div>
-                    <div class="col-md-4">Friend 3</div>
-                    <div class="col-md-4">Friend 1</div>
-                    <div class="col-md-4">Friend 2</div>
-                    <div class="col-md-4">Friend 3</div>
-                    <div class="col-md-4"></div>
-                    <div class="col-md-4">
-                        <p><a class="btn btn-primary btn-lg" href="/friends/find" role="button">Find a friend</a></p>
+                    <c:if test="${empty friends}">
+                        <p class="alert-warning" style="text-align: center">You don't have any friends yet</p>
+                        <center><div class="col-md-12"><img src="/img/face_sad.png" /></div></center>
+                    </c:if>
+                    <c:if test="${not empty friends}">
+                        <c:forEach var="friend" items="${friends}">
+                            <div class="col-md-4"><center><h2><a href="/friends/${friend.id}"> ${friend.username}</a></h2></center></div>
+                        </c:forEach>
+                    </c:if>
+                    <div class="col-md-12">
+                        <p style="text-align: center"><a class="btn btn-primary btn-lg" href="/friends/find" role="button">Find a friend</a></p>
                     </div>
                     <div class="col-md-4"></div>
                 </div>

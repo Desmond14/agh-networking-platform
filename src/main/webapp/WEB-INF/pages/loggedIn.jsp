@@ -65,6 +65,7 @@
                 <!-- Homepage -->
                 <div class="tab-pane fade in active" id="home">
                     <h3>Section A</h3>
+                    <center><img src="/img/banner.jpg" /></center>
                     <p>Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui. Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth.</p>
                 </div>
                 <!-- User's private messages -->
