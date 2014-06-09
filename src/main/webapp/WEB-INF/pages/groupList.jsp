@@ -72,8 +72,8 @@
         <div class="well">
             <h1 class="text-center">All groups:</h1>
             <div class="list-group">
-                <c:if test="${not empty groups}">
-                    <c:forEach var="group" items="${groups}">
+                <c:if test="${not empty usersGroups}">
+                    <c:forEach var="group" items="${usersGroups}">
                         <a href="#" class="list-group-item">
                             <div class="media col-md-3">
                                 <figure class="pull-left">
@@ -85,10 +85,31 @@
                                 <p class="list-group-item-text">${group.description}
                                 </p>
                             </div>
-                            <%--<div class="col-md-3 text-center">
+                            <div class="col-md-3 text-center">
+                                <h2> 120 <small> members </small></h2>
+                                <button type="button" class="btn btn-warning btn-lg">Leave!</button>
+                            </div>
+                        </a>
+                    </c:forEach>
+                </c:if>
+
+                <c:if test="${not empty otherGroups}">
+                    <c:forEach var="group" items="${otherGroups}">
+                        <a href="#" class="list-group-item">
+                            <div class="media col-md-3">
+                                <figure class="pull-left">
+                                    <img class="media-object img-rounded img-responsive" src="http://placehold.it/350x250" alt="placehold.it/350x250" >
+                                </figure>
+                            </div>
+                            <div class="col-md-6">
+                                <h2 class="list-group-item-heading"> ${group.groupName} </h2>
+                                <p class="list-group-item-text">${group.description}
+                                </p>
+                            </div>
+                            <div class="col-md-3 text-center">
                                 <h2> 120 <small> members </small></h2>
                                 <button type="button" class="btn btn-success btn-lg">Join!</button>
-                            </div>--%>
+                            </div>
                         </a>
                     </c:forEach>
                 </c:if>

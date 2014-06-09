@@ -1,6 +1,5 @@
 package com.io.traderbook.controller;
 
-import com.google.common.collect.Sets;
 import com.io.traderbook.model.Group;
 import com.io.traderbook.model.User;
 import com.io.traderbook.service.GroupService;
@@ -55,18 +54,14 @@ public class GroupController {
     }
 
     @RequestMapping(value = "/groups/allgroups")
-    public ModelAndView displayAllGroups() {
+    public ModelAndView displayAllGroups(Principal principal) {
         ModelAndView modelAndView = new ModelAndView("groupList");
-        Collection<Group> groups = groupService.getAll();
-        modelAndView.addObject("groups", groups);
-        return modelAndView;
-    }
 
-    @RequestMapping(value = "/groups/allgroups", params = "mygroups")
-    public ModelAndView displayUsersGroups(Principal principal) {
-        ModelAndView modelAndView = new ModelAndView("groupList");
         Set<Group> usersGroups = groupService.findUserGroups(principal.getName());
         modelAndView.addObject("usersGroups", usersGroups);
+
+        Set<Group> otherGroups = groupService.findOtherGroups(principal.getName());
+        modelAndView.addObject("otherGroups", otherGroups);
         return modelAndView;
     }
 
