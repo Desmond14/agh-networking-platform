@@ -126,6 +126,15 @@ public class User {
 
     @Override
     public boolean equals(Object object) {
+        if(object == null){
+            return false;
+        }
+        if(object.getClass() != User.class){
+            return false;
+        }
+        if(getId() == null){
+            return false;
+        }
         User user = (User) object;
         return getId().equals(user.getId());
     }
