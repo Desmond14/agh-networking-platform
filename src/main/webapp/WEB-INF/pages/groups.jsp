@@ -17,8 +17,16 @@
     <link href="/css/bootstrap.css" rel="stylesheet">
     <!-- Awesome fonts -->
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <link href="/css/jquery.growl.css" rel="stylesheet" type="text/css" />
+
     <script src="<c:url value="/js/jquery-2.0.2js" />"></script>
     <script src="<c:url value="/js/bootstrap.js" />"></script>
+    <script src="<c:url value="/js/jquery.growl.js" />"></script>
+    <script type="text/javascript">
+        function displayInformation() {
+            $.growl.notice({ message: "Successfully created new group!" });
+        }
+    </script>
 </head>
 <body>
 <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
@@ -55,6 +63,7 @@
                 <li><a href="/welcome#profile"><i class="fa fa-user"></i> Profile</a></li>
                 <li><a href="/offers"><i class="fa fa-book"></i> Offers</a></li>
                 <li class="active"><a href="/groups"><i class="fa fa-users"></i> Groups</a></li>
+                <li><a href="/friends"><i class="fa fa-user"></i> Friends</a></li>
                 <li>
                     <c:url value="/j_spring_security_logout" var="logout"/>
                     <a href="${logout}"><i class="fa fa-sign-out"></i> Logout</a>
@@ -66,9 +75,15 @@
                 <div class="jumbotron">
                     <div class="container">
                         <h1>Groups</h1>
+                        <c:if test="${not empty addedGroup}">
+                            <script>
+                                displayInformation();
+                            </script>
+                        </c:if>
                     </div>
                 </div>
                 <p><a class="btn btn-primary btn-lg" href="/groups/create" role="button">Add new Group</a></p>
+                <p><a class="btn btn-primary btn-lg" href="/groups/allgroups" role="button">Display all groups</a></p>
             </div>
         </div>
     </div>

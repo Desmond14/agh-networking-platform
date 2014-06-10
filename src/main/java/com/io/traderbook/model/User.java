@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
@@ -71,7 +72,7 @@ public class User {
         return enabled;
     }
 
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
     @JoinTable(name = "users_groups",
             joinColumns = {@JoinColumn(name = "USER_ID")},
             inverseJoinColumns = {@JoinColumn(name = "GROUP_ID")})

@@ -11,14 +11,20 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.jws.WebParam;
 import java.security.Principal;
+import java.util.*;
 
 @Controller
 public class GroupController {
 
     @Autowired
     private GroupService groupService;
+
+    @Autowired
+    private UserService userService;
 
     @RequestMapping(value = "/groups")
     public String displayGroupPanel() {
@@ -38,6 +44,25 @@ public class GroupController {
             return "addGroup";
         }
         groupService.save(group, principal.getName());
-        return "redirect:/groups";
+        return "redirect:/groups?addedGroup=" + group.getGroupName();
     }
+
+    @RequestMapping(value = "/groups", params = "addedGroup")
+    public String afterAddedNewGroup(ModelMap modelMap) {
+        modelMap.addAttribute("addedGroup", "true");
+        return "groups";
+    }
+
+    @RequestMapping(value = "/groups/allgroups")
+    public ModelAndView displayAllGroups(Principal principal) {
+        ModelAndView modelAndView = new ModelAndView("groupList");
+
+        Set<Group> usersGroups = groupService.findUserGroups(principal.getName());
+        modelAndView.addObject("usersGroups", usersGroups);
+
+        Set<Group> otherGroups = groupService.findOtherGroups(principal.getName());
+        modelAndView.addObject("otherGroups", otherGroups);
+        return modelAndView;
+    }
+
 }

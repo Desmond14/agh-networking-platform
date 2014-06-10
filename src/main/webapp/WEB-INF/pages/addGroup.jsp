@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +16,7 @@
     <link href="/css/dropdownCheckbox.css" rel="stylesheet">
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.css" rel="stylesheet">
-
+    <script src="<c:url value="/js/jquery-2.0.2js" />"></script>
 </head>
 <body>
 <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
@@ -34,7 +35,8 @@
         <div class="navbar-collapse collapse">
             <form class="navbar-form navbar-right" action="/j_spring_security_logout" method="POST">
                 <div class="form-group text-muted">
-                    <strong>Logged as: <a href="#profile">${username}</a> &nbsp</strong>
+                    <strong>Logged as: <a href="/welcome#profile"><sec:authentication
+                            property="principal.username"/></a> &nbsp</strong>
                 </div>
                 <button type="submit" class="btn btn-danger">Log out</button>
             </form>
@@ -49,8 +51,13 @@
 </div>
 
 <div class="container">
+        <ol class="breadcrumb">
+            <li><a href="/groups">Groups</a></li>
+            <li class="active">Create New Group</li>
+        </ol>
         <sf:form method="POST" modelAttribute="group">
             <div class="form-group">
+
                 <label for="groupName" class="col-md-2">
                     Group name:
                 </label>
