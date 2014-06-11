@@ -16,7 +16,10 @@
     <link href="/css/dropdownCheckbox.css" rel="stylesheet">
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/jquery.growl.css" rel="stylesheet" type="text/css" />
     <script src="<c:url value="/js/jquery-2.0.2js" />"></script>
+    <script src="<c:url value="/js/bootstrap.js" />"></script>
+    <script src="<c:url value="/js/jquery.growl.js" />"></script>
     <style type="text/css">
         a.list-group-item {
             height:auto;
@@ -30,6 +33,27 @@
             margin:20px auto 1px;
         }
     </style>
+    <script type="text/javascript">
+        function displayInformationAboutJoinToGroup() {
+            $.growl.notice({ message: "Successfully you have joined to group!" });
+        }
+        function displayInformationAboutLeaveGroup() {
+            $.growl.notice({ message: "Successfully you have left group!" });
+        }
+        function groupButtons(button_id) {
+            var element = document.getElementById(button_id);
+            if (element.innerText == 'Join!') {
+                element.innerText = "Leave!";
+                $(element).removeClass("btn-success").addClass("btn-warning");
+                displayInformationAboutJoinToGroup();
+            }
+            else {
+                element.innerText = "Join!"
+                $(element).removeClass("btn-warning").addClass("btn-success");
+                displayInformationAboutLeaveGroup();
+            }
+        }
+    </script>
 </head>
 <body>
 <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
@@ -74,7 +98,7 @@
             <div class="list-group">
                 <c:if test="${not empty usersGroups}">
                     <c:forEach var="group" items="${usersGroups}">
-                        <a href="#" class="list-group-item">
+                        <a class="list-group-item">
                             <div class="media col-md-3">
                                 <figure class="pull-left">
                                     <img class="media-object img-rounded img-responsive" src="http://placehold.it/350x250" alt="placehold.it/350x250" >
@@ -87,7 +111,7 @@
                             </div>
                             <div class="col-md-3 text-center">
                                 <h2> 120 <small> members </small></h2>
-                                <button type="button" class="btn btn-warning btn-lg">Leave!</button>
+                                <button type="button" id="leaveButton${group.id}" onclick="groupButtons(this.id)" class="btn btn-warning btn-lg">Leave!</button>
                             </div>
                         </a>
                     </c:forEach>
@@ -95,7 +119,7 @@
 
                 <c:if test="${not empty otherGroups}">
                     <c:forEach var="group" items="${otherGroups}">
-                        <a href="#" class="list-group-item">
+                        <a class="list-group-item">
                             <div class="media col-md-3">
                                 <figure class="pull-left">
                                     <img class="media-object img-rounded img-responsive" src="http://placehold.it/350x250" alt="placehold.it/350x250" >
@@ -108,7 +132,7 @@
                             </div>
                             <div class="col-md-3 text-center">
                                 <h2> 120 <small> members </small></h2>
-                                <button type="button" class="btn btn-success btn-lg">Join!</button>
+                                <button type="button" id="joinButton${group.id}" onclick="groupButtons(this.id)" class="btn btn-success btn-lg">Join!</button>
                             </div>
                         </a>
                     </c:forEach>
