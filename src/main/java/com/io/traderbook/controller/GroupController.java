@@ -43,7 +43,7 @@ public class GroupController {
         if (result.hasErrors()) {
             return "addGroup";
         }
-        groupService.save(group, principal.getName());
+        groupService.createNewGroup(group, principal.getName());
         return "redirect:/groups?addedGroup=" + group.getGroupName();
     }
 
