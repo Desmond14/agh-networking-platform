@@ -26,6 +26,14 @@ public class GroupService {
         userRepository.save(user);
     }
 
+    @Transactional
+    public void joinToGroup(String name, String groupName) {
+        User user = userRepository.findByName(name);
+        Group group = groupRepository.findByName(groupName);
+        user.getGroups().add(group);
+        userRepository.save(user);
+    }
+
     public Iterable<Group> getAll() {
         return groupRepository.findAll();
     }

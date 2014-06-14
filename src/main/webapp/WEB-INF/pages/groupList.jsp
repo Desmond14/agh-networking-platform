@@ -35,7 +35,7 @@
     </style>
     <script type="text/javascript">
         function displayInformationAboutJoinToGroup() {
-            $.growl.notice({ message: "Successfully you have joined to group!" });
+            $.growl.notice({ message: "Successfully you have created new group!" });
         }
         function displayInformationAboutLeaveGroup() {
             $.growl.notice({ message: "Successfully you have left group!" });
@@ -46,6 +46,7 @@
                 element.innerText = "Leave!";
                 $(element).removeClass("btn-success").addClass("btn-warning");
                 displayInformationAboutJoinToGroup();
+                window.location.href = "?joined";
             }
             else {
                 element.innerText = "Join!"
@@ -83,7 +84,7 @@
 <!-- Content -->
 <div class="jumbotron">
     <div class="container">
-        <h2>All groups</h2>
+        <h2>My groups</h2>
     </div>
 </div>
 
@@ -91,14 +92,14 @@
     <div class="row">
         <ol class="breadcrumb">
             <li><a href="/groups">Groups</a></li>
-            <li class="active">All groups</li>
+            <li class="active">My groups</li>
         </ol>
         <div class="well">
-            <h1 class="text-center">All groups:</h1>
+            <h1 class="text-center">My groups:</h1>
             <div class="list-group">
                 <c:if test="${not empty usersGroups}">
                     <c:forEach var="group" items="${usersGroups}">
-                        <a class="list-group-item">
+                        <a href="/groups/mygroups/${group.id}" class="list-group-item">
                             <div class="media col-md-3">
                                 <figure class="pull-left">
                                     <img class="media-object img-rounded img-responsive" src="http://placehold.it/350x250" alt="placehold.it/350x250" >
@@ -111,13 +112,11 @@
                             </div>
                             <div class="col-md-3 text-center">
                                 <h2> 120 <small> members </small></h2>
-                                <button type="button" id="leaveButton${group.id}" onclick="groupButtons(this.id)" class="btn btn-warning btn-lg">Leave!</button>
                             </div>
                         </a>
                     </c:forEach>
                 </c:if>
-
-                <c:if test="${not empty otherGroups}">
+                <%--<c:if test="${not empty otherGroups}">
                     <c:forEach var="group" items="${otherGroups}">
                         <a class="list-group-item">
                             <div class="media col-md-3">
@@ -132,11 +131,10 @@
                             </div>
                             <div class="col-md-3 text-center">
                                 <h2> 120 <small> members </small></h2>
-                                <button type="button" id="joinButton${group.id}" onclick="groupButtons(this.id)" class="btn btn-success btn-lg">Join!</button>
                             </div>
                         </a>
                     </c:forEach>
-                </c:if>
+                </c:if>--%>
 
             </div>
         </div>

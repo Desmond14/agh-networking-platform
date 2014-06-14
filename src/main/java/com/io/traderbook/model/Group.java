@@ -1,5 +1,7 @@
 package com.io.traderbook.model;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
@@ -16,9 +18,11 @@ public class Group {
     private Integer id;
 
     @Column(name = "GROUP_NAME", length = 20)
+    @NotEmpty(message = "Group name cannot be empty!")
     private String groupName;
 
     @Column(length = 255)
+    @NotEmpty(message = "Description cannot be empty!")
     private String description;
 
     @ManyToMany(mappedBy = "groups")
@@ -63,5 +67,10 @@ public class Group {
 
     public void setUsers(Set<User> users) {
         this.users = users;
+    }
+
+    @Override
+    public String toString() {
+        return groupName;
     }
 }

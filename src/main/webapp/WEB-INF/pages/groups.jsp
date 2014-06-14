@@ -26,6 +26,9 @@
         function displayInformation() {
             $.growl.notice({ message: "Successfully created new group!" });
         }
+        function displayInformationAboutJoinToGroup() {
+            $.growl.notice({ message: "Successfully joined to group!" });
+        }
     </script>
 </head>
 <body>
@@ -80,10 +83,16 @@
                                 displayInformation();
                             </script>
                         </c:if>
+                        <c:if test="${not empty joinedGroup}">
+                            <script>
+                                displayInformationAboutJoinToGroup();
+                            </script>
+                        </c:if>
                     </div>
                 </div>
                 <p><a class="btn btn-primary btn-lg" href="/groups/create" role="button">Add new Group</a></p>
-                <p><a class="btn btn-primary btn-lg" href="/groups/allgroups" role="button">Display all groups</a></p>
+                <p><a class="btn btn-primary btn-lg" href="/groups/join" role="button">Join to group</a></p>
+                <p><a class="btn btn-primary btn-lg" href="/groups/mygroups" role="button">Display my groups</a></p>
             </div>
         </div>
     </div>
