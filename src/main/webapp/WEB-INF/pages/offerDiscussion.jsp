@@ -75,7 +75,11 @@
             </c:when>
             <c:otherwise>
                 <h2>${offer.title}</h2>
-
+                <c:if test="${offer.image != null}">
+			        <img src="/getImage/${offer.id}" />
+			    </c:if>
+			    <p>Price: <b>${offer.price}</b></p>
+			    <p>Seller: <i>${offer.seller.username}</i></p>
                 <p>${offer.content}</p>
             </c:otherwise>
         </c:choose>
