@@ -1,18 +1,22 @@
 package com.io.traderbook.controller;
 
 import com.io.traderbook.model.Group;
+import com.io.traderbook.model.GroupDiscussionPost;
 import com.io.traderbook.model.JoinGroupForm;
 import com.io.traderbook.model.User;
+import com.io.traderbook.service.GroupDiscussionPostService;
 import com.io.traderbook.service.GroupService;
 import com.io.traderbook.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
@@ -24,6 +28,9 @@ public class GroupController {
 
     @Autowired
     private GroupService groupService;
+
+    @Autowired
+    private GroupDiscussionPostService groupDiscussionPostService;
 
     @Autowired
     private UserService userService;
@@ -101,6 +108,41 @@ public class GroupController {
 
         return new ModelAndView("redirect:/groups?joinedGroup=" + joinGroupForm.getGroupName());
 
+    }
+
+    @RequestMapping(value = "/groups/mygroups/{groupId}", method = RequestMethod.GET)
+    public ModelAndView renderOfferDiscussion(@PathVariable("groupId") Integer groupId) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("groupDiscussion");
+        Group group = groupService.findById(groupId);
+        if (group == null) {
+            modelAndView.addObject("notFound", true);
+            return modelAndView;
+        }
+        modelAndView.addObject("group", group);
+        List<GroupDiscussionPost> discussionPosts = group.getDiscussionPosts();
+        modelAndView.addObject("posts", discussionPosts);
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/groups/mygroups/{groupId}",
+            method = RequestMethod.POST)
+    public
+    @ResponseBody
+    ResponseEntity<String> addPost(@PathVariable("groupId") Integer groupId, @RequestBody GroupDiscussionPost newPost) {
+        Group group = groupService.findById(groupId);
+        if (group == null) {
+            return new ResponseEntity<String>(HttpStatus.METHOD_FAILURE);
+        }
+        newPost.setCorrespondingGroup(group);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        User user = userService.getByName(username);
+        if (user == null) {
+            return new ResponseEntity<String>(HttpStatus.METHOD_FAILURE);
+        }
+        newPost.setPostAuthor(user);
+        groupDiscussionPostService.save(newPost);
+        return new ResponseEntity<String>(HttpStatus.OK);
     }
 
 }

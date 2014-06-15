@@ -26,6 +26,10 @@ public class GroupService {
         userRepository.save(user);
     }
 
+    public Group findById(Integer id) {
+        return groupRepository.findOne(id);
+    }
+
     @Transactional
     public void joinToGroup(String name, String groupName) {
         User user = userRepository.findByName(name);

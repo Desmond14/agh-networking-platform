@@ -1,5 +1,7 @@
 package com.io.traderbook.model;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
@@ -16,6 +18,10 @@ public class Group {
     @Column(name = "GROUP_ID")
     @GeneratedValue
     private Integer id;
+
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(mappedBy = "correspondingGroup")
+    private List<GroupDiscussionPost> discussionPosts;
 
     @Column(name = "GROUP_NAME", length = 20)
     @NotEmpty(message = "Group name cannot be empty!")
@@ -67,6 +73,14 @@ public class Group {
 
     public void setUsers(Set<User> users) {
         this.users = users;
+    }
+
+    public List<GroupDiscussionPost> getDiscussionPosts() {
+        return discussionPosts;
+    }
+
+    public void setDiscussionPosts(List<GroupDiscussionPost> discussionPosts) {
+        this.discussionPosts = discussionPosts;
     }
 
     @Override

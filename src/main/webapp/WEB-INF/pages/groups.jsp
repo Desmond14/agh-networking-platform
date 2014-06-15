@@ -30,6 +30,29 @@
             $.growl.notice({ message: "Successfully joined to group!" });
         }
     </script>
+    <style type="text/css">
+        .btn3d {
+            transition:all .08s linear;
+            position:relative;
+            outline:medium none;
+            -moz-outline-style:none;
+            border:0px;
+            margin-right:10px;
+            margin-top:15px;
+        }
+        .btn3d:focus {
+            outline:medium none;
+            -moz-outline-style:none;
+        }
+        .btn3d:active {
+            top:9px;
+        }
+        .btn-primary {
+            box-shadow:0 0 0 1px #428bca inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 8px 0 0 #357ebd, 0 8px 0 1px rgba(0,0,0,0.4), 0 8px 8px 1px rgba(0,0,0,0.5);
+            background-color:#428bca;
+        }
+    </style>
+
 </head>
 <body>
 <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
@@ -90,9 +113,9 @@
                         </c:if>
                     </div>
                 </div>
-                <p><a class="btn btn-primary btn-lg" href="/groups/create" role="button">Add new Group</a></p>
-                <p><a class="btn btn-primary btn-lg" href="/groups/join" role="button">Join to group</a></p>
-                <p><a class="btn btn-primary btn-lg" href="/groups/mygroups" role="button">Display my groups</a></p>
+                <p><a class="btn btn-primary btn-lg btn3d" href="/groups/create" role="button">Add new Group</a></p>
+                <p><a class="btn btn-primary btn-lg btn3d" href="/groups/join" role="button">Join to group</a></p>
+                <p><a class="btn btn-primary btn-lg btn3d" href="/groups/mygroups" role="button">Display my groups</a></p>
             </div>
         </div>
     </div>

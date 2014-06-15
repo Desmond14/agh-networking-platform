@@ -14,6 +14,7 @@
     <link href="/css/signin.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
     <link href="/css/dropdownCheckbox.css" rel="stylesheet">
+    <link href="/css/button3d.css" rel="stylesheet">
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.css" rel="stylesheet">
     <link href="/css/jquery.growl.css" rel="stylesheet" type="text/css" />
@@ -31,6 +32,10 @@
         }
         .stars {
             margin:20px auto 1px;
+        }
+        .btn-success {
+            box-shadow:0 0 0 1px #5cb85c inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 8px 0 0 #4cae4c, 0 8px 0 1px rgba(0,0,0,0.4), 0 8px 8px 1px rgba(0,0,0,0.5);
+            background-color:#5cb85c;
         }
     </style>
 </head>
@@ -82,7 +87,7 @@
         <sf:errors path="groupName" id="error"></sf:errors>
         <br>
         <div class="col-md-10">
-            <button type="submit" class="btn btn-lg btn-success">
+            <button type="submit" class="btn btn-lg btn-success btn3d">
                 Join!
             </button>
         </div>

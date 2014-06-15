@@ -14,9 +14,20 @@
     <link href="/css/signin.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
     <link href="/css/dropdownCheckbox.css" rel="stylesheet">
+    <link href="/css/button3d.css" rel="stylesheet">
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.css" rel="stylesheet">
     <script src="<c:url value="/js/jquery-2.0.2js" />"></script>
+    <style type="text/css">
+        .btn-primary {
+            box-shadow:0 0 0 1px #428bca inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 8px 0 0 #357ebd, 0 8px 0 1px rgba(0,0,0,0.4), 0 8px 8px 1px rgba(0,0,0,0.5);
+            background-color:#428bca;
+        }
+        .btn-success {
+            box-shadow:0 0 0 1px #5cb85c inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 8px 0 0 #4cae4c, 0 8px 0 1px rgba(0,0,0,0.4), 0 8px 8px 1px rgba(0,0,0,0.5);
+            background-color:#5cb85c;
+        }
+    </style>
 </head>
 <body>
 <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
@@ -83,8 +94,8 @@
                 </div>
                 <div class="col-md-10">
                     <div class="btn-group">
-                        <button type="submit" class="btn btn-lg btn-success" style="margin: 10px">Submit</button>
-                        <a class="btn btn-lg btn-primary" href="/groups/" role="button" style="margin: 10px">Cancel</a>
+                        <button type="submit" class="btn btn-lg btn-success btn3d" style="margin: 10px">Submit</button>
+                        <a class="btn btn-lg btn-primary btn3d" href="/groups/" role="button" style="margin: 10px">Cancel</a>
                     </div>
                 </div>
             </div>
