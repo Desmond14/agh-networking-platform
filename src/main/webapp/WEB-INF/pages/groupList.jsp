@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -111,31 +112,20 @@
                                 </p>
                             </div>
                             <div class="col-md-3 text-center">
-                                <h2> 120 <small> members </small></h2>
+                                <c:forEach var="numOfMembers" items="${numberOfMembersInGroup}">
+                                    <c:if test="${group.groupName eq numOfMembers.key}">
+                                        <c:if test="${numOfMembers.value == 1}">
+                                            <h2> ${numOfMembers.value} <small> member </small></h2>
+                                        </c:if>
+                                        <c:if test="${numOfMembers.value != 1}">
+                                            <h2> ${numOfMembers.value} <small> members </small></h2>
+                                        </c:if>
+                                    </c:if>
+                                </c:forEach>
                             </div>
                         </a>
                     </c:forEach>
                 </c:if>
-                <%--<c:if test="${not empty otherGroups}">
-                    <c:forEach var="group" items="${otherGroups}">
-                        <a class="list-group-item">
-                            <div class="media col-md-3">
-                                <figure class="pull-left">
-                                    <img class="media-object img-rounded img-responsive" src="http://placehold.it/350x250" alt="placehold.it/350x250" >
-                                </figure>
-                            </div>
-                            <div class="col-md-6">
-                                <h2 class="list-group-item-heading"> ${group.groupName} </h2>
-                                <p class="list-group-item-text">${group.description}
-                                </p>
-                            </div>
-                            <div class="col-md-3 text-center">
-                                <h2> 120 <small> members </small></h2>
-                            </div>
-                        </a>
-                    </c:forEach>
-                </c:if>--%>
-
             </div>
         </div>
     </div>

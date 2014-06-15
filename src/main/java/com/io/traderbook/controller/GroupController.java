@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.jws.WebParam;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.*;
@@ -68,8 +67,11 @@ public class GroupController {
 
         Set<Group> usersGroups = groupService.findUserGroups(principal.getName());
         modelAndView.addObject("usersGroups", usersGroups);
-
-
+        Map<String, Integer> numOfMembersInGroup = new HashMap<String, Integer>();
+        for (Group group : usersGroups) {
+            numOfMembersInGroup.put(group.getGroupName(), group.getUsers().size());
+        }
+        modelAndView.addObject("numberOfMembersInGroup", numOfMembersInGroup);
         return modelAndView;
     }
 
@@ -85,13 +87,19 @@ public class GroupController {
     }
 
     @RequestMapping(value = "/groups/join", method = RequestMethod.POST)
-    public String joinGroup(@ModelAttribute @Valid JoinGroupForm joinGroupForm, BindingResult result, Principal principal) {
+    public ModelAndView joinGroup(@ModelAttribute @Valid JoinGroupForm joinGroupForm, BindingResult result, Principal principal) {
+        ModelAndView modelAndView = new ModelAndView("joinGroup");
+
+        Set<Group> otherGroups = groupService.findOtherGroups(principal.getName());
+        modelAndView.addObject("otherGroups", otherGroups);
+
         if (result.hasErrors()) {
-            return "joinGroup";
+            return modelAndView;
         }
+
         groupService.joinToGroup(principal.getName(), joinGroupForm.getGroupName());
 
-        return "redirect:/groups?joinedGroup=" + joinGroupForm.getGroupName();
+        return new ModelAndView("redirect:/groups?joinedGroup=" + joinGroupForm.getGroupName());
 
     }
 

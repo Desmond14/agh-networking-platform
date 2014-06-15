@@ -25,7 +25,7 @@ public class Group {
     @NotEmpty(message = "Description cannot be empty!")
     private String description;
 
-    @ManyToMany(mappedBy = "groups")
+    @ManyToMany(mappedBy = "groups", fetch = FetchType.EAGER)
     private Set<User> users = new HashSet<User>();
 
     public Group(String groupName, String description) {
