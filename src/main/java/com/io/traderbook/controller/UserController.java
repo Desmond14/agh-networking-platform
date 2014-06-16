@@ -14,7 +14,7 @@ import java.security.Principal;
 import java.util.List;
 
 @Controller
-public class RatingController {
+public class UserController {
 	
 	@Autowired
     private RatingService ratingService;
@@ -22,27 +22,13 @@ public class RatingController {
     @Autowired
     private UserService userService;
     
-    @RequestMapping(value = "/welcome#profile", method = RequestMethod.GET)
-    public ModelAndView renderRatings(Principal principal) {
-        String username = principal.getName();
-        User user = userService.getByName(username);
-        List<Rating> ratingsReceived = ratingService.findByRateeId(user.getId());
-        List<Rating> ratingsGiven = ratingService.findByRaterId(user.getId());
-
-        ModelAndView modelAndView = new ModelAndView("welcome#profile");
-        modelAndView.addObject("ratingsReceived", ratingsReceived);
-        modelAndView.addObject("ratingsGiven", ratingsGiven);
-
-        return modelAndView;
-    }
-    
     @RequestMapping(value = "/user/{userId}", method = RequestMethod.GET)
     public ModelAndView renderRatings(@PathVariable("userId") Integer userId, Principal principal) {
         ModelAndView modelAndView = new ModelAndView("user");
-        org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) ((Authentication)principal).getPrincipal();
-		String name = user.getUsername();
+        org.springframework.security.core.userdetails.User userTmp = (org.springframework.security.core.userdetails.User) ((Authentication)principal).getPrincipal();
+		String name = userTmp.getUsername();
         User viewedUser = userService.getById(userId);
-        if (user == null) {
+        if (viewedUser == null) {
             modelAndView.addObject("notFound", true);
             return modelAndView;
         }
