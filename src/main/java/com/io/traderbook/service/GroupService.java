@@ -20,8 +20,20 @@ public class GroupService {
     private GroupRepository groupRepository;
 
     @Transactional
-    public void save(Group group, String name) {
+    public void createNewGroup(Group group, String name) {
         User user = userRepository.findByName(name);
+        user.getGroups().add(group);
+        userRepository.save(user);
+    }
+
+    public Group findById(Integer id) {
+        return groupRepository.findOne(id);
+    }
+
+    @Transactional
+    public void joinToGroup(String name, String groupName) {
+        User user = userRepository.findByName(name);
+        Group group = groupRepository.findByName(groupName);
         user.getGroups().add(group);
         userRepository.save(user);
     }

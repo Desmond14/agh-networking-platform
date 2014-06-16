@@ -3,8 +3,6 @@ package com.io.traderbook.model;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -30,6 +28,8 @@ public class Offer {
 
     @NotEmpty(message = "Offer location cannot be empty")
     private String location;
+
+    private byte[] image;
     
     private int price;
     
@@ -75,6 +75,13 @@ public class Offer {
         this.seller = seller;
     }
 
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
 
     public long getId() {
         return id;

@@ -73,9 +73,16 @@
 		            <c:if test="${not empty offers}">
 		                <c:forEach var="offer" items="${offers}">
                     		<c:if test="${((empty minPrice) and (empty maxPrice)) or ((empty maxPrice) and (offer.price > minPrice)) or ((empty minPrice) and (offer.price < maxPrice)) or ((offer.price > minPrice) and (offer.price < maxPrice))}">
-			                    <h2>${offer.title}</h2>
-			                    <p><b>${offer.price}</b></p>
-			                    <p><b>${offer.location}</b></p>
+
+			                    <h2>
+			                    <c:if test="${offer.image != null}">
+                                    <img src="/getImage/${offer.id}" style="height: 100px"/>
+                                </c:if>
+			                    ${offer.title}
+			                    </h2>
+
+			                    <p>price: <b>${offer.price}</b></p>
+			                    <p>location: <b>${offer.location}</b></p>
 			                    <p>${offer.content} </p>
 			                    <p><i>${offer.seller.username}</i></p>
 			
