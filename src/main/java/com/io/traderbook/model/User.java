@@ -30,6 +30,7 @@ public class User {
 
     private Set<Group> groups = new HashSet<Group>();
 
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<User> friends;
 
     @ManyToMany(mappedBy = "users")
@@ -132,10 +133,7 @@ public class User {
         if(object.getClass() != User.class){
             return false;
         }
-        if(getId() == null){
-            return false;
-        }
         User user = (User) object;
-        return getId().equals(user.getId());
+        return getUsername().equals(user.getUsername());
     }
 }

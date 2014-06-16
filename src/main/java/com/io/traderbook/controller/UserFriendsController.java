@@ -44,18 +44,22 @@ public class UserFriendsController {
                 return searchForm;
 
             User searchingUser = userService.getByName(principal.getName());
-            Set<User> friends = searchingUser.getFriends();
 
             Iterable<User> users = userService.selectAllUsers();
             List<User> foundedUsers = new ArrayList<User>();
 
             for (User user : users) {
                 if (user.getUsername().toLowerCase().contains(searchString.toLowerCase())) {
-                    if (!friends.contains(user) || searchingUser.equals(user)) {
+                    if (!searchingUser.equals(user)) {
                         foundedUsers.add(user);
                     }
                 }
             }
+
+            for (User friend : searchingUser.getFriends()) {
+                foundedUsers.remove(friend);
+            }
+
             searchForm.addObject("foundedUsers", foundedUsers);
         }
         return searchForm;
@@ -69,7 +73,7 @@ public class UserFriendsController {
             return "/home";
         }
         invitingUser.getFriends().add(invitedUser);
-        userService.setNewFriendsForId(invitingUser.getFriends(), invitingUser.getUsername());
+        userService.setNewFriendsForId(invitingUser.getFriends(), invitingUser.getId());
         return "redirect:/friends";
     }
 

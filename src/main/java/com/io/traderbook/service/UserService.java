@@ -24,6 +24,8 @@ public class UserService {
     @Autowired
     private UserRolesRepository userRolesRepository;
 
+    @PersistenceContext(unitName="uaiContactsPU") private EntityManager entityManager;
+
     public void insertNewUser(User user) {
         user.setEnabled(true);
         UserRoles userRoles = new UserRoles(user.getId(), Roles.ROLE_USER.toString(), user);
@@ -61,8 +63,13 @@ public class UserService {
         return userRepository.findById(id);
     }
 
-    public Integer setNewFriendsForId(Set<User> friends, String username) {
-        return userRepository.setNewFriendsForId(friends, username);
+    @Transactional
+    public Integer setNewFriendsForId(Set<User> friends, Integer userId) {
+        User user = entityManager.find(User.class, userId);
+        user.setFriends(friends);
+        entityManager.flush();
+        entityManager.clear();
+        return user.getId();
     }
 
     public void delete(Integer id) {

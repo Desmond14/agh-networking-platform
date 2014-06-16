@@ -21,8 +21,4 @@ public interface UserRepository extends CrudRepository<User, Integer> {
     @Query(value = "select u from User u where u.id = ?1")
     User findById(Integer id);
 
-    @Modifying
-    @Transactional(readOnly = false)
-    @Query("UPDATE User u SET u.friends = ?1 WHERE u.username = ?2")
-    Integer setNewFriendsForId(Set<User> friends, String username);
 }
