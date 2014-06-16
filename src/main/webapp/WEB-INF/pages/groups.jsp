@@ -29,6 +29,9 @@
         function displayInformationAboutJoinToGroup() {
             $.growl.notice({ message: "Successfully joined to group!" });
         }
+        function displayInformationAboutLeaveGroup() {
+            $.growl.notice({ message: "Successfully left group!" });
+        }
     </script>
     <style type="text/css">
         .btn3d {
@@ -111,10 +114,16 @@
                                 displayInformationAboutJoinToGroup();
                             </script>
                         </c:if>
+                        <c:if test="${not empty leftGroup}">
+                            <script>
+                                displayInformationAboutLeaveGroup();
+                            </script>
+                        </c:if>
                     </div>
                 </div>
                 <p><a class="btn btn-primary btn-lg btn3d" href="/groups/create" role="button">Add new Group</a></p>
                 <p><a class="btn btn-primary btn-lg btn3d" href="/groups/join" role="button">Join to group</a></p>
+                <p><a class="btn btn-primary btn-lg btn3d" href="/groups/leave" role="button">Leave group</a></p>
                 <p><a class="btn btn-primary btn-lg btn3d" href="/groups/mygroups" role="button">Display my groups</a></p>
             </div>
         </div>

@@ -2,7 +2,7 @@ package com.io.traderbook.controller;
 
 import com.io.traderbook.model.Group;
 import com.io.traderbook.model.GroupDiscussionPost;
-import com.io.traderbook.model.JoinGroupForm;
+import com.io.traderbook.model.GroupForm;
 import com.io.traderbook.model.User;
 import com.io.traderbook.service.GroupDiscussionPostService;
 import com.io.traderbook.service.GroupService;
@@ -68,6 +68,12 @@ public class GroupController {
         return "groups";
     }
 
+    @RequestMapping(value = "/groups", params = "leftGroup")
+    public String afterLeftGroup(ModelMap modelMap) {
+        modelMap.addAttribute("leftGroup", "true");
+        return "groups";
+    }
+
     @RequestMapping(value = "/groups/mygroups")
     public ModelAndView displayUserGroups(Principal principal) {
         ModelAndView modelAndView = new ModelAndView("groupList");
@@ -88,13 +94,13 @@ public class GroupController {
 
         Set<Group> otherGroups = groupService.findOtherGroups(principal.getName());
         modelAndView.addObject("otherGroups", otherGroups);
-        modelAndView.addObject("joinGroupForm", new JoinGroupForm());
+        modelAndView.addObject("groupForm", new GroupForm());
 
         return modelAndView;
     }
 
     @RequestMapping(value = "/groups/join", method = RequestMethod.POST)
-    public ModelAndView joinGroup(@ModelAttribute @Valid JoinGroupForm joinGroupForm, BindingResult result, Principal principal) {
+    public ModelAndView joinGroup(@ModelAttribute @Valid GroupForm groupForm, BindingResult result, Principal principal) {
         ModelAndView modelAndView = new ModelAndView("joinGroup");
 
         Set<Group> otherGroups = groupService.findOtherGroups(principal.getName());
@@ -104,9 +110,37 @@ public class GroupController {
             return modelAndView;
         }
 
-        groupService.joinToGroup(principal.getName(), joinGroupForm.getGroupName());
+        groupService.joinToGroup(principal.getName(), groupForm.getGroupName());
 
-        return new ModelAndView("redirect:/groups?joinedGroup=" + joinGroupForm.getGroupName());
+        return new ModelAndView("redirect:/groups?joinedGroup=" + groupForm.getGroupName());
+
+    }
+
+    @RequestMapping(value = "/groups/leave", method = RequestMethod.GET)
+    public ModelAndView renderLeaveGroupForm(Principal principal) {
+        ModelAndView modelAndView = new ModelAndView("leaveGroup");
+
+        Set<Group> userGroups = groupService.findUserGroups(principal.getName());
+        modelAndView.addObject("userGroups", userGroups);
+        modelAndView.addObject("groupForm", new GroupForm());
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/groups/leave", method = RequestMethod.POST)
+    public ModelAndView leaveGroup(@ModelAttribute @Valid GroupForm groupForm, BindingResult result, Principal principal) {
+        ModelAndView modelAndView = new ModelAndView("leaveGroup");
+
+        Set<Group> userGroups = groupService.findUserGroups(principal.getName());
+        modelAndView.addObject("userGroups", userGroups);
+
+        if (result.hasErrors()) {
+            return modelAndView;
+        }
+
+        groupService.leaveGroup(principal.getName(), groupForm.getGroupName());
+
+        return new ModelAndView("redirect:/groups?leftGroup=" + groupForm.getGroupName());
 
     }
 

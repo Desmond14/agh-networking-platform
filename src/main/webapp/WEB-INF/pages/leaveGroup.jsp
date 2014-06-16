@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Join Group</title>
+    <title>Leave Group</title>
     <link href="/css/signin.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
     <link href="/css/dropdownCheckbox.css" rel="stylesheet">
@@ -67,38 +67,38 @@
 <!-- Content -->
 <div class="jumbotron">
     <div class="container">
-        <h2>Join Group</h2>
+        <h2>Leave Group</h2>
     </div>
 </div>
 
 <div class="container">
-        <ol class="breadcrumb">
-            <li><a href="/groups">Groups</a></li>
-            <li class="active">Join Group</li>
-        </ol>
+    <ol class="breadcrumb">
+        <li><a href="/groups">Groups</a></li>
+        <li class="active">Leave Group</li>
+    </ol>
 
     <h4>Choose group from list:</h4>
-    <sf:form modelAttribute="groupForm" action="join" method="post" >
+    <sf:form modelAttribute="groupForm" action="leave" method="post" >
         <sf:select path="groupName" class="form-control">
             <sf:option value=""></sf:option>
-            <sf:options items="${otherGroups}"></sf:options>
+            <sf:options items="${userGroups}"></sf:options>
         </sf:select>
 
         <sf:errors path="groupName" id="error"></sf:errors>
         <br>
         <div class="col-md-10">
             <button type="submit" class="btn btn-lg btn-success btn3d">
-                Join!
+                Leave!
             </button>
         </div>
     </sf:form>
 </div>
 
-    <hr>
+<hr>
 
-    <footer>
-        <p>&copy; Company 2014</p>
-    </footer>
+<footer>
+    <p>&copy; Company 2014</p>
+</footer>
 
 <!-- /container -->
 
