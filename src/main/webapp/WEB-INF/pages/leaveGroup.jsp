@@ -10,18 +10,28 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Add Group</title>
+    <title>Leave Group</title>
     <link href="/css/signin.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
     <link href="/css/dropdownCheckbox.css" rel="stylesheet">
     <link href="/css/button3d.css" rel="stylesheet">
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/jquery.growl.css" rel="stylesheet" type="text/css" />
     <script src="<c:url value="/js/jquery-2.0.2js" />"></script>
+    <script src="<c:url value="/js/bootstrap.js" />"></script>
+    <script src="<c:url value="/js/jquery.growl.js" />"></script>
     <style type="text/css">
-        .btn-primary {
-            box-shadow:0 0 0 1px #428bca inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 8px 0 0 #357ebd, 0 8px 0 1px rgba(0,0,0,0.4), 0 8px 8px 1px rgba(0,0,0,0.5);
-            background-color:#428bca;
+        a.list-group-item {
+            height:auto;
+            min-height:200px;
+            background: #ffffff;
+        }
+        a.list-group-item.active small {
+            color: #2f49ff;
+        }
+        .stars {
+            margin:20px auto 1px;
         }
         .btn-success {
             box-shadow:0 0 0 1px #5cb85c inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 8px 0 0 #4cae4c, 0 8px 0 1px rgba(0,0,0,0.4), 0 8px 8px 1px rgba(0,0,0,0.5);
@@ -55,64 +65,41 @@
     </div>
 </div>
 <!-- Content -->
-<<div class="jumbotron">
+<div class="jumbotron">
     <div class="container">
-       <h2>Create New Group</h2>
+        <h2>Leave Group</h2>
     </div>
 </div>
 
 <div class="container">
-        <ol class="breadcrumb">
-            <li><a href="/groups">Groups</a></li>
-            <li class="active">Create New Group</li>
-        </ol>
-        <sf:form method="POST" modelAttribute="group">
-            <div class="form-group">
+    <ol class="breadcrumb">
+        <li><a href="/groups">Groups</a></li>
+        <li class="active">Leave Group</li>
+    </ol>
 
-                <label for="groupName" class="col-md-2">
-                    Group name:
-                </label>
-                <div class="col-md-10">
-                    <sf:input path="groupName" class="form-control" id="groupName" placeholder="Group name"/>
-                    <sf:errors path="groupName" cssStyle="color: #ff0000"/>
-                </div>
-            </div>
+    <h4>Choose group from list:</h4>
+    <sf:form modelAttribute="groupForm" action="leave" method="post" >
+        <sf:select path="groupName" class="form-control">
+            <sf:option value=""></sf:option>
+            <sf:options items="${userGroups}"></sf:options>
+        </sf:select>
 
-            <div class="form-group">
-                <label for="description" class="col-md-2">
-                    Description:
-                </label>
-
-                <div class="col-md-10">
-                    <sf:textarea path="description" class="form-control" id="description" placeholder="Description"/>
-                    <sf:errors path="description" cssStyle="color: #ff0000"/>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-2">
-                </div>
-                <div class="col-md-10">
-                    <div class="btn-group">
-                        <button type="submit" class="btn btn-lg btn-success btn3d" style="margin: 10px">Submit</button>
-                        <a class="btn btn-lg btn-primary btn3d" href="/groups/" role="button" style="margin: 10px">Cancel</a>
-                    </div>
-                </div>
-            </div>
-
-        </sf:form>
-    <div class="row">
-        <div class="col-md-4">
-
+        <sf:errors path="groupName" id="error"></sf:errors>
+        <br>
+        <div class="col-md-10">
+            <button type="submit" class="btn btn-lg btn-success btn3d">
+                Leave!
+            </button>
         </div>
-    </div>
-
-    <hr>
-
-    <footer>
-        <p>&copy; Company 2014</p>
-    </footer>
+    </sf:form>
 </div>
+
+<hr>
+
+<footer>
+    <p>&copy; Company 2014</p>
+</footer>
+
 <!-- /container -->
 
 <script src="js/dropdown-checkbox.js"></script>

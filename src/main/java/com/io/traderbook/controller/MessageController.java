@@ -7,7 +7,6 @@ import com.io.traderbook.service.MessageService;
 import com.io.traderbook.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -70,7 +69,7 @@ public class MessageController {
     public void addOtherUsernamesToModel(ModelAndView modelAndView, User user) {
         List<String> usernames = new ArrayList<String>();
         for (User currentUser : userService.selectAllUsers()) {
-            if (!currentUser.equals(user)) {
+            if (!currentUser.getUsername().equals(user.getUsername())) {
                 usernames.add(currentUser.getUsername());
             }
         }

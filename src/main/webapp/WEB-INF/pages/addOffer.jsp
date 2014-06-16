@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Sign in to TraderBook</title>
+    <title>Add Offer - TraderBook</title>
     <link href="/css/signout.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
     <!-- Bootstrap core CSS -->
@@ -45,7 +45,7 @@
 </div>
 <!-- /.navbar -->
 <div class="container">
-    <sf:form method="POST" modelAttribute="offer">
+    <sf:form method="POST" modelAttribute="offer" enctype="multipart/form-data">
         <h2>Add offer</h2>
         <br>
         <div class="form-group">
@@ -91,17 +91,18 @@
             </div>
         </div>
 
-        <%--<div class="form-group">
+        <div class="form-group">
             <label for="uploadimage" class="col-md-2">
                 Upload Image:
             </label>
             <div class="col-md-10">
-                <sf:input path="file" name="uploadimage" id="uploadimage"/>
+                <input name="uploadimage" type="file"/>
                 <p class="help-block">
-                    Allowed formats: jpeg, jpg, gif, png
+                    Please upload JPG files only.
                 </p>
+                <sf:errors path="image" cssStyle="color: #ff0000"/>
             </div>
-        </div>--%>
+        </div>
 
         <div class="row">
             <div class="col-md-2">

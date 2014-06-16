@@ -17,8 +17,45 @@
     <link href="/css/bootstrap.css" rel="stylesheet">
     <!-- Awesome fonts -->
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <link href="/css/jquery.growl.css" rel="stylesheet" type="text/css" />
+
     <script src="<c:url value="/js/jquery-2.0.2js" />"></script>
     <script src="<c:url value="/js/bootstrap.js" />"></script>
+    <script src="<c:url value="/js/jquery.growl.js" />"></script>
+    <script type="text/javascript">
+        function displayInformation() {
+            $.growl.notice({ message: "Successfully created new group!" });
+        }
+        function displayInformationAboutJoinToGroup() {
+            $.growl.notice({ message: "Successfully joined to group!" });
+        }
+        function displayInformationAboutLeaveGroup() {
+            $.growl.notice({ message: "Successfully left group!" });
+        }
+    </script>
+    <style type="text/css">
+        .btn3d {
+            transition:all .08s linear;
+            position:relative;
+            outline:medium none;
+            -moz-outline-style:none;
+            border:0px;
+            margin-right:10px;
+            margin-top:15px;
+        }
+        .btn3d:focus {
+            outline:medium none;
+            -moz-outline-style:none;
+        }
+        .btn3d:active {
+            top:9px;
+        }
+        .btn-primary {
+            box-shadow:0 0 0 1px #428bca inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 8px 0 0 #357ebd, 0 8px 0 1px rgba(0,0,0,0.4), 0 8px 8px 1px rgba(0,0,0,0.5);
+            background-color:#428bca;
+        }
+    </style>
+
 </head>
 <body>
 <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
@@ -55,6 +92,7 @@
                 <li><a href="/welcome#profile"><i class="fa fa-user"></i> Profile</a></li>
                 <li><a href="/offers"><i class="fa fa-book"></i> Offers</a></li>
                 <li class="active"><a href="/groups"><i class="fa fa-users"></i> Groups</a></li>
+                <li><a href="/friends"><i class="fa fa-user"></i> Friends</a></li>
                 <li>
                     <c:url value="/j_spring_security_logout" var="logout"/>
                     <a href="${logout}"><i class="fa fa-sign-out"></i> Logout</a>
@@ -66,9 +104,27 @@
                 <div class="jumbotron">
                     <div class="container">
                         <h1>Groups</h1>
+                        <c:if test="${not empty addedGroup}">
+                            <script>
+                                displayInformation();
+                            </script>
+                        </c:if>
+                        <c:if test="${not empty joinedGroup}">
+                            <script>
+                                displayInformationAboutJoinToGroup();
+                            </script>
+                        </c:if>
+                        <c:if test="${not empty leftGroup}">
+                            <script>
+                                displayInformationAboutLeaveGroup();
+                            </script>
+                        </c:if>
                     </div>
                 </div>
-                <p><a class="btn btn-primary btn-lg" href="/groups/create" role="button">Add new Group</a></p>
+                <p><a class="btn btn-primary btn-lg btn3d" href="/groups/create" role="button">Add new Group</a></p>
+                <p><a class="btn btn-primary btn-lg btn3d" href="/groups/join" role="button">Join to group</a></p>
+                <p><a class="btn btn-primary btn-lg btn3d" href="/groups/leave" role="button">Leave group</a></p>
+                <p><a class="btn btn-primary btn-lg btn3d" href="/groups/mygroups" role="button">Display my groups</a></p>
             </div>
         </div>
     </div>

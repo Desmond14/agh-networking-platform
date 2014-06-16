@@ -11,9 +11,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Welcome to TradeBook: ${username}</title>
-    <link href="/css/loggedIn.css" rel="stylesheet">
-    <link href="/css/style.css" rel="stylesheet">
+    <title>Groups</title>
+    <link href="/css/groups.css" rel="stylesheet">
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.css" rel="stylesheet">
     <!-- Awesome fonts -->
@@ -52,11 +51,11 @@
         <div class="col-md-2">
             <ul class="nav nav-pills nav-stacked well" id="tabs">
                 <li><a href="/welcome"><i class="fa fa-home"></i> Home</a></li>
-                <li class="active"><a href="/messages"><i class="fa fa-envelope"></i> Messages</a></li>
+                <li><a href="/messages"><i class="fa fa-envelope"></i> Messages</a></li>
                 <li><a href="/welcome#profile"><i class="fa fa-user"></i> Profile</a></li>
                 <li><a href="/offers"><i class="fa fa-book"></i> Offers</a></li>
-                <li><a href="/groups"><i class="fa fa-users"></i> Groups</a></li>
-                <li><a href="/friends"><i class="fa fa-user"></i>Friends</a></li>
+                <li><a href="/groups"><i class="fa fa-users"></i>Groups</a></li>
+                <li class="active"><a href="/friends"><i class="fa fa-user"></i> Friends</a></li>
                 <li>
                     <c:url value="/j_spring_security_logout" var="logout"/>
                     <a href="${logout}"><i class="fa fa-sign-out"></i> Logout</a>
@@ -65,49 +64,26 @@
         </div>
         <div class="col-md-10">
             <div class="tab-content">
-                <!-- User's private messages -->
-                <div class="tab-pane active" id="messages">
-                    <ul class="nav nav-tabs" id="myTab">
-                        <li><a href="#send" data-toggle="tab"><i class="fa fa-reply-all"></i> Send message</a></li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="send">
-                            <sf:form modelAttribute="messageForm" action="sendMessage" method="post" >
-                                <sf:select path="receiverUsername" class="form-control">
-                                    <sf:option value=""></sf:option>
-                                    <sf:options items="${usernames}"></sf:options>
-                                </sf:select>
-                                <sf:errors path="receiverUsername" id="error"></sf:errors>
 
-                                <sf:input path="topic" placeholder="Topic" class="form-control"></sf:input>
-                                <sf:errors path="topic" id="error"></sf:errors>
-
-                                <sf:textarea path="messageContent" placeholder="Enter your message here" rows="3" class="form-control"></sf:textarea>
-                                <sf:errors path="messageContent" id="error"></sf:errors>
-                                <br>
-                                <div class="col-md-10">
-                                    <button type="submit" class="btn btn-lg btn-success">
-                                        Submit
-                                    </button>
-                                </div>
-                            </sf:form>
-                            <div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <c:if test="${not empty message}">
-                        <h4 id="success">${message}</h4>
+                <div class="row">
+                    <c:if test="${empty friends}">
+                        <p class="alert-warning" style="text-align: center">You don't have any friends yet</p>
+                        <center><div class="col-md-12"><img src="/img/face_sad.png" /></div></center>
                     </c:if>
+                    <c:if test="${not empty friends}">
+                        <c:forEach var="friend" items="${friends}">
+                            <div class="col-md-4"><center><h2><a href="/friends/${friend.id}"> ${friend.username}</a></h2></center></div>
+                        </c:forEach>
+                    </c:if>
+                    <div class="col-md-12">
+                        <p style="text-align: center"><a class="btn btn-primary btn-lg" href="/friends/find" role="button">Find a friend</a></p>
+                    </div>
+                    <div class="col-md-4"></div>
                 </div>
-
-
             </div>
         </div>
     </div>
     <br><br><br>
-</div>
-</div>
 </div>
 </body>
 </html>

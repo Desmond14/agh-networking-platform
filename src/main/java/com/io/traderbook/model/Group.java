@@ -1,7 +1,12 @@
 package com.io.traderbook.model;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -14,13 +19,19 @@ public class Group {
     @GeneratedValue
     private Integer id;
 
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(mappedBy = "correspondingGroup")
+    private List<GroupDiscussionPost> discussionPosts;
+
     @Column(name = "GROUP_NAME", length = 20)
+    @NotEmpty(message = "Group name cannot be empty!")
     private String groupName;
 
     @Column(length = 255)
+    @NotEmpty(message = "Description cannot be empty!")
     private String description;
 
-    @ManyToMany(mappedBy = "groups")
+    @ManyToMany(mappedBy = "groups", fetch = FetchType.EAGER)
     private Set<User> users = new HashSet<User>();
 
     public Group(String groupName, String description) {
@@ -62,5 +73,18 @@ public class Group {
 
     public void setUsers(Set<User> users) {
         this.users = users;
+    }
+
+    public List<GroupDiscussionPost> getDiscussionPosts() {
+        return discussionPosts;
+    }
+
+    public void setDiscussionPosts(List<GroupDiscussionPost> discussionPosts) {
+        this.discussionPosts = discussionPosts;
+    }
+
+    @Override
+    public String toString() {
+        return groupName;
     }
 }

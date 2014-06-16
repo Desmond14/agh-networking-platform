@@ -6,6 +6,7 @@ import com.io.traderbook.model.User;
 import com.io.traderbook.service.OfferDiscussionPostService;
 import com.io.traderbook.service.OfferService;
 import com.io.traderbook.service.UserService;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,9 +16,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import javax.servlet.http.HttpServletRequest;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.security.Principal;
 import java.util.List;
 
@@ -104,12 +112,36 @@ public class OffersController {
 
     @RequestMapping(value = "/addOffer",
             method = RequestMethod.POST)
-    public String addOffer(Offer offer, BindingResult result, ModelMap modelMap, Principal principal) {
-        if (result.hasErrors()) {
+    public String addOffer(@Valid Offer offer, @RequestParam(value="uploadimage", required=false) MultipartFile image, BindingResult result, ModelMap modelMap, Principal principal) {
+        if(result.hasErrors()) {
             return "addOffer";
+        }
+        if(!image.isEmpty()){
+            if(!image.getContentType().equals("image/jpeg")){
+                result.rejectValue("image", "Wrong file format!", "Only JPEG files are allowed!");
+                return "addOffer";
+            }
+            else {
+                try {
+                    offer.setImage(image.getBytes());
+                } catch (IOException e) {
+                    result.rejectValue("image", "IOError", "Input/Output error has occurred!");
+                    return "addOffer";
+                }
+            }
         }
         offer.setSeller(userService.getByName(principal.getName()));
         offerService.save(offer);
         return "redirect:/offers";
+    }
+
+    @RequestMapping(value = "/getImage/{offerId}")
+    public void getOfferImage(HttpServletResponse response, @PathVariable("offerId") long offerId) throws IOException {
+        response.setContentType("image/jpeg");
+        byte[] buffer = offerService.findById(offerId).getImage();
+        if(buffer!=null) {
+            InputStream inputStream = new ByteArrayInputStream(buffer);
+            IOUtils.copy(inputStream, response.getOutputStream());
+        }
     }
 }

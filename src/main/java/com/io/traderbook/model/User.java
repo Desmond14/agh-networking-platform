@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
@@ -28,6 +29,12 @@ public class User {
     private boolean enabled;
 
     private Set<Group> groups = new HashSet<Group>();
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<User> friends;
+
+    @ManyToMany(mappedBy = "users")
+    private Set<User> friendOf;
 
     @Id
     @GeneratedValue
@@ -66,12 +73,20 @@ public class User {
         return enabled;
     }
 
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
     @JoinTable(name = "users_groups",
             joinColumns = {@JoinColumn(name = "USER_ID")},
             inverseJoinColumns = {@JoinColumn(name = "GROUP_ID")})
     public Set<Group> getGroups() {
         return groups;
+    }
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "USER_FRIENDS",
+            joinColumns = @JoinColumn(name = "USER_ID"),
+            inverseJoinColumns = @JoinColumn(name = "FRIEND_ID"))
+    public Set<User> getFriends() {
+        return friends;
     }
 
     public void setId(Integer id) {
@@ -104,5 +119,21 @@ public class User {
 
     public void setGroups(Set<Group> groups) {
         this.groups = groups;
+    }
+
+    public void setFriends(Set<User> friends) {
+        this.friends = friends;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if(object == null){
+            return false;
+        }
+        if(object.getClass() != User.class){
+            return false;
+        }
+        User user = (User) object;
+        return getUsername().equals(user.getUsername());
     }
 }

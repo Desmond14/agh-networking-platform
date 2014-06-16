@@ -9,9 +9,10 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Offer ${offer.title} - TraderBook</title>
+    <title>Group ${group.groupName} - TraderBook</title>
     <link href="/css/signin.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/button3d.css" rel="stylesheet">
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.css" rel="stylesheet">
     <script src="/js/jquery-2.0.2js"></script>
@@ -19,7 +20,7 @@
         function addComment() {
             $.ajax({
                 type: "POST",
-                url: "./" + ${offer.id},
+                url: "./" + ${group.id},
                 data: JSON.stringify({ postContent: $('textarea[name=comment-form]').val() }),
                 contentType: 'application/json',
                 success: function() {
@@ -41,6 +42,12 @@
             $( "#comments").append($rowDiv);
         };
     </script>
+    <style type="text/css">
+        .btn-warning {
+            box-shadow:0 0 0 1px #f0ad4e inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 8px 0 0 #eea236, 0 8px 0 1px rgba(0,0,0,0.4), 0 8px 8px 1px rgba(0,0,0,0.5);
+            background-color:#f0ad4e;
+        }
+    </style>
 </head>
 <body>
 <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
@@ -59,7 +66,7 @@
         <div class="navbar-collapse collapse">
             <form class="navbar-form navbar-right" action="/j_spring_security_logout" method="POST">
                 <div class="form-group text-muted">
-                    <strong>Logged as: <sec:authentication property="principal.username"/> &nbsp</strong>
+                    <strong>Logged as: <a href="/welcome#profile"><sec:authentication property="principal.username"/></a> &nbsp</strong>
                 </div>
                 <button type="submit" class="btn btn-danger">Log out</button>
             </form>
@@ -71,31 +78,29 @@
     <div class="container">
         <c:choose>
             <c:when test="${not empty notFound}">
-                <h2>Offer not found!</h2>
+                <h2>Group not found!</h2>
             </c:when>
             <c:otherwise>
-                <h2>${offer.title}</h2>
-                <c:if test="${offer.image != null}">
-			        <img src="/getImage/${offer.id}" />
-			    </c:if>
-			    <p>Price: <b>${offer.price}</b></p>
-			    <p>Seller: <i>${offer.seller.username}</i></p>
-                <p>${offer.content}</p>
+                <h2>${group.groupName}</h2>
             </c:otherwise>
         </c:choose>
     </div>
 </div>
 
 <div class="container" id="comments">
+    <ol class="breadcrumb">
+        <li><a href="/groups">Groups</a></li>
+        <li><a href="/groups/mygroups">My groups</a></li>
+        <li class="active">${group.groupName}</li>
+    </ol>
     <c:if test="${empty notFound}">
         <div class="row">
-        <span><textarea placeholder="Enter your comment here" class="form-control" name="comment-form"
-                        rows="3"></textarea>
-        </span>
-        <span><button type="button" class="btn btn-primary" onclick="addComment()">Submit comment
-        </button></span>
+            <span>
+                <textarea placeholder="Write Post..." class="form-control input-sm" name="comment-form" rows="3"></textarea>
+            </span>
+            <span><button type="button" class="btn btn-warning btn3d" onclick="addComment()">Submit Post</button></span>
         </div>
-        <h3>Comments:</h3>
+        <h3>Posts:</h3>
         <c:if test="${not empty posts}">
             <c:forEach var="post" items="${posts}">
                 <div class="row">
@@ -112,7 +117,7 @@
         </c:if>
     </c:if>
 </div>
-    <hr>
+<hr>
 <div class="container">
     <footer>
         <p>&copy; Company 2014</p>

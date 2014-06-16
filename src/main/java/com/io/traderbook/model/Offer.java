@@ -1,5 +1,7 @@
 package com.io.traderbook.model;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -18,11 +20,16 @@ public class Offer {
     @JoinColumn(name = "seller_user_id")
     private User seller;
 
+    @NotEmpty(message = "Offer description cannot be empty")
     private String content;
 
+    @NotEmpty(message = "Offer title cannot be empty")
     private String title;
-    
+
+    @NotEmpty(message = "Offer location cannot be empty")
     private String location;
+
+    private byte[] image;
     
     private int price;
     
@@ -68,6 +75,13 @@ public class Offer {
         this.seller = seller;
     }
 
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
 
     public long getId() {
         return id;
