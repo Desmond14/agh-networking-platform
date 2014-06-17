@@ -80,7 +80,7 @@
 
                         <p>${offer.content} </p>
 
-                        <p><i>${offer.seller.username}</i></p>
+                        <p><a href="/user/${offer.seller.id}"><i>${offer.seller.username}</i></a></p>
 
                         <p><a class="btn btn-default" href="/offers/${offer.id}" role="button">View details &raquo;</a>
                         </p>

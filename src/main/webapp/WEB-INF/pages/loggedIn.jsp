@@ -107,7 +107,46 @@
                 <div class="panel tab-pane fade" id="profile">
                     <div class="tab-content">
                         <img class="pic img-circle" src="http://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/twDq00QDud4/s120-c/photo.jpg" alt="...">
-                        <div class="name"><small>${username}</small></div>
+                        <div class="name">
+                        	<small>${username}</small>
+                        	<c:choose>
+		                        <c:when test="${not empty ratingsReceived}">
+		                        	<c:set var="rateCount" value="0" scope="page"/>
+		                        	<c:forEach var="rating" items="${ratingsReceived}">
+		                        		<c:choose>
+		                        			<c:when test="${rating.isPositive()}">
+		                        				<c:set var="rateCount" value="${rateCount + 1}" scope="page"/>
+		                        			</c:when>
+		                        			<c:otherwise>
+		                        				<c:set var="rateCount" value="${rateCount - 1}" scope="page"/>
+		                        			</c:otherwise>
+		                        		</c:choose>
+		                        	</c:forEach>
+		                        	<c:choose>
+		                        		<c:when test="${rateCount > 0}">
+				                        	<span class="label label-success">
+				                        		${rateCount}
+				                        	</span>
+		                        		</c:when>
+		                        		<c:when test="${rateCount < 0}">
+				                        	<span class="label label-danger">
+				                        		${rateCount}
+				                        	</span>
+		                        		</c:when>
+		                        		<c:otherwise>
+				                        	<span class="label label-primary">
+				                        		${rateCount}
+				                        	</span>
+		                        		</c:otherwise>
+		                        	</c:choose>
+		                        </c:when>
+	                        	<c:otherwise>
+		                        	<span class="label label-primary">
+		                        		0
+		                        	</span>
+	                        	</c:otherwise>
+		                    </c:choose>
+                        </div>
                         <a href="#" class="btn btn-xs btn-primary pull-right" style="margin:10px;"><span class="glyphicon glyphicon-picture"></span> Change cover</a>
                         <div class="profileContent well">
                             <b>Login: &nbsp</b><input type="text" size="25" disabled="true" value="${username}"><br><br>

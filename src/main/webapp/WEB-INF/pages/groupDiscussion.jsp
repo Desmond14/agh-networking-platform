@@ -106,7 +106,8 @@
                 <div class="row">
 
                     <div class="col-md-8">
-                        <span class="author">${post.postAuthor.username}</span>
+
+                        <a href="/user/${post.postAuthor.id}"><span class="author">${post.postAuthor.username}</span></a>
 
                         <p>${post.postContent}</p>
 
