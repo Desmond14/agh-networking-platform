@@ -79,7 +79,7 @@
 			        <img src="/getImage/${offer.id}" />
 			    </c:if>
 			    <p>Price: <b>${offer.price}</b></p>
-			    <p>Seller: <i>${offer.seller.username}</i></p>
+			    <p>Seller: <a href="/user/${offer.seller.id}"><i>${offer.seller.username}</i></a></p>
                 <p>${offer.content}</p>
             </c:otherwise>
         </c:choose>
@@ -101,7 +101,7 @@
                 <div class="row">
 
                     <div class="col-md-8">
-                        <span class="author">${post.postAuthor.username}</span>
+                        <a href="/user/${post.postAuthor.id}"><span class="author">${post.postAuthor.username}</span></a>
 
                         <p>${post.postContent}</p>
 
