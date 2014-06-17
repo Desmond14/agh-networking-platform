@@ -33,12 +33,69 @@ public class UserController {
             return modelAndView;
         }
         List<Rating> ratingsReceived = ratingService.findByRateeId(viewedUser.getId());
-        List<Rating> ratingsGiven = ratingService.findByRaterId(viewedUser.getId());
 
         modelAndView.addObject("username", name);
         modelAndView.addObject("viewedUser", viewedUser);
         modelAndView.addObject("ratingsReceived", ratingsReceived);
-        modelAndView.addObject("ratingsGiven", ratingsGiven);
+
+        return modelAndView;
+    }
+    
+    @RequestMapping(value = "/user/{userId}", method = RequestMethod.POST)
+    public ModelAndView addRating(@PathVariable("userId") Integer userId, Principal principal, @RequestParam String buttonType) {
+        ModelAndView modelAndView = new ModelAndView("user");
+        org.springframework.security.core.userdetails.User userTmp = (org.springframework.security.core.userdetails.User) ((Authentication)principal).getPrincipal();
+		String name = userTmp.getUsername();
+		User userRating = userService.getByName(name);
+        User userRated = userService.getById(userId);
+        if (userRated == null) {
+            modelAndView.addObject("notFound", true);
+            return modelAndView;
+        }
+        List<Rating> ratingsReceived = ratingService.findByRateeId(userRated.getId());
+        if (!userRated.equals(userRating)) {
+	        boolean found = false;
+	        if(buttonType.equals("rateUp")){
+		        for(Rating r : ratingsReceived){
+		        	if(r.getRater().equals(userRating)){
+		        		if(!r.isPositive()){
+		        			r.setPositive(true);
+		    	    		ratingService.save(r);
+		        		}
+		        		found = true;
+		        	}
+		        }
+		    	if(!found){
+		    		Rating newRating = new Rating();
+		    		newRating.setRater(userRating);
+		    		newRating.setRatee(userRated);
+		    		newRating.setPositive(true);
+		    		ratingService.save(newRating);
+		    	}
+	        } else if(buttonType.equals("rateDown")) {
+		        for(Rating r : ratingsReceived){
+		        	if(r.getRater().equals(userRating)){
+		        		if(r.isPositive()){
+		        			r.setPositive(false);
+		    	    		ratingService.save(r);
+		        		}
+		        		found = true;
+		        	}
+		        }
+		    	if(!found){
+		    		Rating newRating = new Rating();
+		    		newRating.setRater(userRating);
+		    		newRating.setRatee(userRated);
+		    		newRating.setPositive(false);
+		    		ratingService.save(newRating);
+		    	}
+	        }
+	        ratingsReceived = ratingService.findByRateeId(userRated.getId());
+        }
+
+        modelAndView.addObject("username", name);
+        modelAndView.addObject("viewedUser", userRated);
+        modelAndView.addObject("ratingsReceived", ratingsReceived);
 
         return modelAndView;
     }

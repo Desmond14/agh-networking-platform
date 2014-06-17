@@ -146,12 +146,6 @@
 		                        	</span>
 	                        	</c:otherwise>
 		                    </c:choose>
-	                        <button class="btn btn-default" type="rateUp">
-	                        	<span class="glyphicon glyphicon-thumbs-up"></span>
-	                        </button>
-	                        <button class="btn btn-default" type="rateDown">
-	                        	<span class="glyphicon glyphicon-thumbs-down"></span>
-	                        </button>
                         </div>
                         <a href="#" class="btn btn-xs btn-primary pull-right" style="margin:10px;"><span class="glyphicon glyphicon-picture"></span> Change cover</a>
                         <div class="profileContent well">

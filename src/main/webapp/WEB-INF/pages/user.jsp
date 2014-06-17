@@ -38,7 +38,7 @@
 	        <div class="navbar-collapse collapse">
 	            <form class="navbar-form navbar-right" action="/j_spring_security_logout" method="POST">
 	                <div class="form-group text-muted">
-	                    <strong>Logged as: <a href="#profile">${username}</a> &nbsp</strong>
+	                    <strong>Logged as: <a href="/welcome#profile">${username}</a> &nbsp</strong>
 	                </div>
 	                <button type="submit" class="btn btn-danger">Log out</button>
 	            </form>
@@ -63,52 +63,54 @@
 	            </ul>
 	        </div>
 	        <div class="col-md-10">
-            	<img class="pic img-circle" src="http://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/twDq00QDud4/s120-c/photo.jpg" alt="...">
-                <div class="name">
-                    <small>${viewedUser.getUsername()}</small>
-                    <c:choose>
-	                    <c:when test="${not empty ratingsReceived}">
-	                        <c:set var="rateCount" value="0" scope="page"/>
-	                        <c:forEach var="rating" items="${ratingsReceived}">
-	                        	<c:choose>
-	                        		<c:when test="${rating.isPositive()}">
-	                        			<c:set var="rateCount" value="${rateCount + 1}" scope="page"/>
-	                        		</c:when>
-	                        		<c:otherwise>
-	                        			<c:set var="rateCount" value="${rateCount - 1}" scope="page"/>
-	                        		</c:otherwise>
-	                        	</c:choose>
-	                        </c:forEach>
-	                        <c:choose>
-	                        	<c:when test="${rateCount > 0}">
-			                        <span class="label label-success">
-			                        	${rateCount}
-			                        </span>
-	                        	</c:when>
-	                        	<c:when test="${rateCount < 0}">
-			                        <span class="label label-danger">
-			                        	${rateCount}
-			                        </span>
-	                        	</c:when>
-	                        	<c:otherwise>
-			                        <span class="label label-primary">
-			                        	${rateCount}
-			                        </span>
-	                        	</c:otherwise>
-	                        </c:choose>
-	                    </c:when>
-                        <c:otherwise>
-	                        <span class="label label-primary">
-	                        	0
-	                        </span>
-                        </c:otherwise>
-	                </c:choose>
-	                <button class="btn btn-default" type="rateUp">
-	                    <span class="glyphicon glyphicon-thumbs-up"></span>
-	                </button>
-	                <button class="btn btn-default" type="rateDown">
-	                    <span class="glyphicon glyphicon-thumbs-down"></span>
-	                </button>
+	            <form method="POST" action="/user/${viewedUser.getId()}">
+	            	<img class="pic img-circle" src="http://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/twDq00QDud4/s120-c/photo.jpg" alt="...">
+	                <div class="name">
+	                    <small>${viewedUser.getUsername()}</small>
+	                    <c:choose>
+		                    <c:when test="${not empty ratingsReceived}">
+		                        <c:set var="rateCount" value="0" scope="page"/>
+		                        <c:forEach var="rating" items="${ratingsReceived}">
+		                        	<c:choose>
+		                        		<c:when test="${rating.isPositive()}">
+		                        			<c:set var="rateCount" value="${rateCount + 1}" scope="page"/>
+		                        		</c:when>
+		                        		<c:otherwise>
+		                        			<c:set var="rateCount" value="${rateCount - 1}" scope="page"/>
+		                        		</c:otherwise>
+		                        	</c:choose>
+		                        </c:forEach>
+		                        <c:choose>
+		                        	<c:when test="${rateCount > 0}">
+				                        <span class="label label-success">
+				                        	${rateCount}
+				                        </span>
+		                        	</c:when>
+		                        	<c:when test="${rateCount < 0}">
+				                        <span class="label label-danger">
+				                        	${rateCount}
+				                        </span>
+		                        	</c:when>
+		                        	<c:otherwise>
+				                        <span class="label label-primary">
+				                        	${rateCount}
+				                        </span>
+		                        	</c:otherwise>
+		                        </c:choose>
+		                    </c:when>
+	                        <c:otherwise>
+		                        <span class="label label-primary">
+		                        	0
+		                        </span>
+	                        </c:otherwise>
+		                </c:choose>
+		                <button class="btn btn-default" type="submit" name="buttonType" value="rateUp">
+		                    <span class="glyphicon glyphicon-thumbs-up"></span>
+		                </button>
+		                <button class="btn btn-default" type="submit" name="buttonType" value="rateDown">
+		                    <span class="glyphicon glyphicon-thumbs-down"></span>
+		                </button>
+	                </form>
                 </div>
                 <div class="profileContent well">
                     <b>Email: &nbsp</b><input type="text" size="25" disabled="true" value="${viewedUser.getEmail()}"><br><br>
